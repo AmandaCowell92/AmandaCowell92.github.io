@@ -11,6 +11,18 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+  <div class="math-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="1260" cy="-30" r="380" fill="none" stroke="#2f7a4b" stroke-width="1.5" opacity="0.08"/>
+      <circle cx="1260" cy="-30" r="270" fill="none" stroke="#2f7a4b" stroke-width="0.8" opacity="0.05"/>
+      <circle cx="-40" cy="920" r="260" fill="none" stroke="#4a55a8" stroke-width="1" opacity="0.06"/>
+      <path d="M 150 920 Q 720 260 1290 920" fill="none" stroke="#2f7a4b" stroke-width="1" opacity="0.045"/>
+      <line x1="1060" y1="680" x2="1190" y2="680" stroke="#2f7a4b" stroke-width="0.9" opacity="0.07"/>
+      <line x1="1125" y1="615" x2="1125" y2="748" stroke="#2f7a4b" stroke-width="0.9" opacity="0.07"/>
+      <circle cx="340" cy="160" r="3.5" fill="#2f7a4b" opacity="0.09"/>
+      <circle cx="60" cy="310" r="2" fill="#2f7a4b" opacity="0.08"/>
+    </svg>
+  </div>
   <div class="container">
 
     <a href="/" class="back-link">← Amanda Cowell</a>
@@ -19,6 +31,11 @@
       <h1 class="project-title">ChalkboardAI</h1>
       <p class="project-subtitle">Local-first AI math tutoring grounded in lecture-specific context. In development.</p>
       <span class="status-badge">In development</span>
+      <div class="project-meta">
+        <span class="meta-chip">Self-directed</span>
+        <span class="meta-chip">2024–present</span>
+        <span class="meta-chip accent">Local-first · FERPA-compliant</span>
+      </div>
     </header>
 
     <img class="project-hero-img" src="/assets/chalkboardai-hero.svg" alt="ChalkboardAI interface showing the infinite canvas with a math problem and AI tutor chat panel" width="720" height="405">
@@ -112,8 +129,20 @@
       </ul>
     </section>
 
-    <div class="project-footer-note">
-      Built with Claude Code. Tech stack: React, TypeScript, Fabric.js, Ollama, IndexedDB, Whisper.cpp, Kokoro TTS, Speech Rule Engine.
+    <div class="tech-stack-wrap">
+      <p class="tech-stack-label">Built with Claude Code.</p>
+      <div class="tech-chips">
+        <span class="tech-chip">React</span>
+        <span class="tech-chip">TypeScript</span>
+        <span class="tech-chip">Fabric.js</span>
+        <span class="tech-chip">Ollama</span>
+        <span class="tech-chip">gemma3:27b</span>
+        <span class="tech-chip">IndexedDB</span>
+        <span class="tech-chip">Whisper.cpp</span>
+        <span class="tech-chip">Kokoro TTS</span>
+        <span class="tech-chip">Speech Rule Engine</span>
+        <span class="tech-chip">nomic-embed-text</span>
+      </div>
     </div>
 
   </div>
