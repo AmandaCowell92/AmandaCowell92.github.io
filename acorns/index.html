@@ -97,44 +97,32 @@
             Team health check web app. Shipped and in use.
           </p>
         </div>
-        <div class="lg:col-span-4">
-          <div class="w-full rounded-xl overflow-hidden bg-primary-container shadow-2xl">
-            <img class="w-full h-64 object-cover" src="/assets/acorns-hero.svg" alt="Acorns of Wisdom dashboard with team ratings">
+        <div class="lg:col-span-4 flex flex-col gap-4">
+          <div class="p-6 bg-surface-container-low rounded-xl">
+            <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Role</span>
+            <p class="font-medium text-on-surface">Self-directed</p>
+          </div>
+          <div class="p-6 bg-surface-container-low rounded-xl">
+            <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Timeline</span>
+            <p class="font-medium text-on-surface">2024</p>
+          </div>
+          <div class="p-6 bg-surface-container-low rounded-xl">
+            <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Stack</span>
+            <div class="flex flex-wrap gap-1.5 mt-1">
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono italic">Built with Claude Code</span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">React</span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Firebase</span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Firestore</span>
+              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Vercel</span>
+            </div>
           </div>
         </div>
+      </div>
+      <!-- Hero image -->
+      <div class="mt-16 rounded-xl overflow-hidden aspect-[21/9] shadow-2xl">
+        <img class="w-full h-full object-cover" src="/assets/acorns-hero.svg" alt="Acorns of Wisdom dashboard with team ratings">
       </div>
     </header>
-
-    <!-- Meta strip -->
-    <div class="bg-surface-container-low py-8 mb-24">
-      <div class="max-w-7xl mx-auto px-6 flex flex-wrap gap-6">
-        <div>
-          <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-1">Role</span>
-          <p class="font-medium text-on-surface">Self-directed</p>
-        </div>
-        <div class="w-px bg-outline-variant hidden md:block"></div>
-        <div>
-          <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-1">Timeline</span>
-          <p class="font-medium text-on-surface">2024</p>
-        </div>
-        <div class="w-px bg-outline-variant hidden md:block"></div>
-        <div>
-          <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-1">Status</span>
-          <p class="font-medium text-on-surface">Shipped · In use</p>
-        </div>
-        <div class="w-px bg-outline-variant hidden md:block"></div>
-        <div>
-          <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-1">Stack</span>
-          <div class="flex flex-wrap gap-1.5 mt-0.5">
-            <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono italic">Built with Claude Code</span>
-            <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">React</span>
-            <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Firebase</span>
-            <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Firestore</span>
-            <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Vercel</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- The Problem -->
     <section class="bg-surface-container-low py-24 mb-24 overflow-hidden">
