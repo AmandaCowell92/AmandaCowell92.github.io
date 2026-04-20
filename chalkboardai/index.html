@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChalkboardAI — Amanda L. Cowell</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <a href="/" class="back-link">← Amanda Cowell</a>
+
+    <header class="project-header">
+      <h1 class="project-title">ChalkboardAI</h1>
+      <p class="project-subtitle">Local-first AI math tutoring grounded in lecture-specific context. In development.</p>
+      <span class="status-badge">In development</span>
+    </header>
+
+    <img class="project-hero-img" src="/assets/chalkboardai-hero.svg" alt="ChalkboardAI interface showing the infinite canvas with a math problem and AI tutor chat panel" width="720" height="405">
+
+    <!-- The problem -->
+    <section class="project-section">
+      <h2>The problem</h2>
+      <p>Generic AI tutors don't know how your instructor actually taught a topic. Math presentation varies significantly between instructors, the notation, the approach, the order concepts are introduced, the specific examples used, and those variations matter for students trying to reinforce what they just learned.</p>
+      <p>ChalkboardAI bridges this gap. An instructor uses it as a live lecture board. After class, it becomes each student's personal AI-assisted study tool, grounded in the specific lecture the student's instructor actually taught, with citations back to the source material.</p>
+    </section>
+
+    <!-- Why local-first -->
+    <section class="project-section">
+      <h2>Why local-first</h2>
+      <p>Every part of the AI stack runs locally on a Mac Studio: inference (Ollama with <code>gemma3:27b</code>), transcription (Whisper), embeddings (<code>nomic-embed-text</code>), and text-to-speech (Kokoro).</p>
+      <p>This isn't a fashion choice. Student interactions with AI tutors are educational records under FERPA, and transcript logging and retrievability matter under FOIA. Keeping everything on-premise is the responsible architectural choice for institutional deployment. It also happens to zero out the per-student cost.</p>
+    </section>
+
+    <!-- What's built -->
+    <section class="project-section">
+      <h2>What's built (student side, v1)</h2>
+      <p>The entire student-facing experience works end-to-end, running against a corpus of hand-written mock transcripts (Limits, Continuity, Derivatives, Chain Rule, and more).</p>
+
+      <img class="screenshot" src="/assets/chalkboardai-canvas.svg" alt="Infinite canvas with math notation" width="720" height="405">
+
+      <ul>
+        <li>Infinite canvas with pen, eraser, shapes, text, laser tool, image paste, pan and pinch-zoom, undo/redo that covers math objects, and a pinned pen library with auto light/dark color pairing.</li>
+        <li>Streaming chat with a vision-capable local model that reads the student's board each turn. Citation badges link back to the lecture the model is pulling from.</li>
+        <li>RAG grounding against a local IndexedDB vector store with cosine similarity search and an active-lecture retrieval boost.</li>
+        <li>Chat session lifecycle scoped per (course, lecture), with rolling summarization to handle long sessions and archiving of past sessions so the tutor can surface what happened "last time" when the student asks.</li>
+        <li>Local voice I/O: Whisper.cpp for transcription from the browser, Kokoro TTS for spoken responses. Math is spoken via the same accessibility pipeline MathJax uses for screen readers (Speech Rule Engine with ClearSpeak).</li>
+        <li>Responsible AI surfaces: accuracy disclaimer permanently visible, one-time-per-session acknowledgment modal before any AI interaction.</li>
+      </ul>
+
+      <div class="screenshot-pair">
+        <img class="screenshot" src="/assets/chalkboardai-chat.svg" alt="Chat panel with lecture citations" width="350" height="350">
+        <img class="screenshot" src="/assets/chalkboardai-voice.svg" alt="Voice input and output controls" width="350" height="350">
+      </div>
+    </section>
+
+    <!-- Product decisions -->
+    <section class="project-section">
+      <h2>Product decisions worth calling out</h2>
+      <p>Four calls from the build process that meaningfully shaped the product. Each was documented in a commit or a persistent decision file at the time so the scope stays defensible.</p>
+
+      <br>
+
+      <div class="decision-block">
+        <h3>Socratic enforcement: accept leakage, fix the UX instead</h3>
+        <p>The model occasionally leaks worked answers in the chat body even with strict system prompting. I rejected a two-stage critic model (added latency) and blunt regex filtering (too many false positives on legitimate recall queries). The landing spot: accept occasional leakage, but hide AI-generated artifact tags during streaming so the flash-and-vanish is less jarring. No "hide answers" toggle, the complexity wasn't worth the marginal benefit.</p>
+      </div>
+
+      <div class="decision-block">
+        <h3>Inline chat artifacts over a duplicated help zone</h3>
+        <p>An early version had a top-of-sidebar "help canvas" where AI-generated math items appeared. It duplicated the chat. I removed it in favor of AI-generated items rendering inline under the chat bubble that produced them, still draggable onto the main board. Single flow beat duplicated affordances.</p>
+      </div>
+
+      <div class="decision-block">
+        <h3>Rolling summary over sliding window for context management</h3>
+        <p>When the model started slowing down and drifting on format rules mid-session, the obvious fix was a sliding context window. I rejected it because "the AI remembers what we worked on 20 minutes ago" was first-class important for the product. Rolling summarization preserves continuity at the cost of a second model call. The reactive-fix shape of this decision taught me that designing for context pressure from the start would have avoided the triggering degradation in the first place.</p>
+      </div>
+
+      <div class="decision-block">
+        <h3>Accessibility-first as a tiebreaker default</h3>
+        <p>A working bespoke regex pipeline for math speech was deleted in favor of the Speech Rule Engine, the standards-based accessibility pipeline MathJax uses for screen readers. The trade: about 300KB of bundle size for correct, broad coverage of math notation without case-by-case authoring. I decided that when an accessibility-aware library exists and works, it wins by default.</p>
+      </div>
+    </section>
+
+    <!-- Prototype learnings -->
+    <section class="project-section">
+      <h2>Prototype-cycle learnings</h2>
+      <p>Four things I learned building this that a spec couldn't have surfaced:</p>
+      <ol>
+        <li>Socratic enforcement is fundamentally hard to solve in prompting alone. Specified the constraint, observed the violations, tried filtering, reverted, landed on "accept it and fix the UX." Only runtime behavior would have surfaced this path.</li>
+        <li>Context growth degrades format adherence, not just speed. The model didn't just slow down mid-session, it also started violating format rules. This informed the rolling-summary fix and aggressive trimming of the API payload.</li>
+        <li>Bespoke regex pipelines win early, then lose. My targeted rules for derivative notation and function application worked fine at first. When I asked whether a standard existed, the accessibility TTS standard covered a much broader set of notation correctly with no case-by-case authoring. Informs a broader principle: default to the accessibility-aware library when one exists.</li>
+        <li>Install-time failures don't show up in specs. Browser-bundling a speech ruleset requires locale JSON served as static assets. New Python deps don't fit the default macOS Python. Both surfaced only at install time, which led to writing a postinstall hook and a <code>uv</code>-managed Python 3.12 path.</li>
+      </ol>
+    </section>
+
+    <!-- Honest limitations -->
+    <section class="project-section">
+      <h2>Honest limitations</h2>
+      <p>Every product has the version of itself that doesn't exist yet. Here's ChalkboardAI's:</p>
+      <ul>
+        <li>Real-user validation is zero. No students, tutors, or faculty have exercised it. Response quality, retrieval thresholds, and the tone of the AI tutor are all based on self-testing.</li>
+        <li>The corpus is synthetic. Mock transcripts are hand-written, not real Whisper output. They're cleaner and more retrieval-friendly than real lectures will be.</li>
+        <li>Instructor side is entirely unbuilt. The half of the product that generates the content students study against doesn't exist yet.</li>
+        <li>No auth, no accounts. Single-machine, single-user local storage. Switching students means clearing browser state.</li>
+        <li>Institutional sign-offs pending. Spec documents FOIA coordinator approval and academic-integrity approval as prerequisites before a real launch.</li>
+      </ul>
+    </section>
+
+    <div class="project-footer-note">
+      Built with Claude Code. Tech stack: React, TypeScript, Fabric.js, Ollama, IndexedDB, Whisper.cpp, Kokoro TTS, Speech Rule Engine.
+    </div>
+
+  </div>
+</body>
+</html>

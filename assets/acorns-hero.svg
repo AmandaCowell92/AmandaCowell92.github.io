@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#F3EFE9"/>
+  <rect x="1" y="1" width="798" height="448" fill="none" stroke="#E8E2DB" stroke-width="2" stroke-dasharray="10,5"/>
+  <rect x="320" y="170" width="160" height="110" rx="10" fill="none" stroke="#D4C8C0" stroke-width="2"/>
+  <circle cx="400" cy="225" r="28" fill="none" stroke="#D4C8C0" stroke-width="2"/>
+  <circle cx="400" cy="225" r="13" fill="#E8E2DB"/>
+  <rect x="338" y="162" width="36" height="16" rx="4" fill="#D4C8C0"/>
+  <text x="400" y="320" font-family="Georgia, serif" font-size="17" fill="#7A6E68" text-anchor="middle" font-style="italic">Acorns of Wisdom dashboard</text>
+  <text x="400" y="344" font-family="Georgia, serif" font-size="13" fill="#B8B0AA" text-anchor="middle">image coming soon</text>
+</svg>

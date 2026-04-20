@@ -1,0 +1,527 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #FAF8F4;
+  --text: #2B2420;
+  --accent: #B8563C;
+  --accent2: #2D4A3E;
+  --muted: #7A6E68;
+  --border: #E8E2DB;
+  --card-bg: #F3EFE9;
+  --max-w: 720px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --- Typography --- */
+
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-optical-sizing: auto;
+  line-height: 1.2;
+}
+
+p {
+  margin-bottom: 1.1em;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.1em;
+}
+
+li {
+  margin-bottom: 0.35em;
+}
+
+code {
+  font-size: 0.88em;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.1em 0.4em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+/* --- Links --- */
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent2);
+}
+
+/* =====================
+   HOMEPAGE HERO
+   ===================== */
+
+.hero {
+  padding: 4.5rem 0 3rem;
+}
+
+.hero-name {
+  font-size: clamp(2.6rem, 6vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.hero-tagline {
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 1.4rem;
+  margin-top: 0.8rem;
+}
+
+.contact-strip {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.contact-strip a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.contact-strip a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* =====================
+   SECTIONS
+   ===================== */
+
+.section {
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-heading-wrap {
+  margin-bottom: 1.8rem;
+}
+
+.section-heading {
+  font-size: 1.35rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.2rem;
+}
+
+/* =====================
+   ABOUT
+   ===================== */
+
+.about-text {
+  font-size: 1.02rem;
+}
+
+/* =====================
+   PROJECT CARDS
+   ===================== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card:hover {
+  box-shadow: 0 4px 20px rgba(43, 36, 32, 0.1);
+  transform: translateY(-2px);
+}
+
+.project-card-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+
+.project-card-body {
+  padding: 1.2rem 1.25rem 1.4rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  font-family: 'Fraunces', serif;
+  color: var(--text);
+}
+
+.project-card-subtitle {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+.project-card-teaser {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: auto;
+  transition: color 0.15s;
+}
+
+.read-more:hover {
+  color: var(--accent2);
+}
+
+/* =====================
+   EXPERIENCE
+   ===================== */
+
+.experience-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.2rem;
+}
+
+.experience-item {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.experience-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.exp-role {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.exp-org {
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.resume-cta {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.resume-cta a {
+  color: var(--muted);
+  transition: color 0.15s;
+}
+
+.resume-cta a:hover {
+  color: var(--accent);
+}
+
+/* =====================
+   FOOTER
+   ===================== */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 0 3rem;
+  margin-top: 1rem;
+}
+
+.footer-text {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.footer-text a {
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.footer-text a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.footer-math {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.8rem;
+  color: var(--border);
+  transition: color 0.4s ease;
+  cursor: default;
+  display: inline-block;
+  margin-top: 1.2rem;
+  letter-spacing: 0.03em;
+  user-select: none;
+}
+
+.footer-math:hover {
+  color: var(--accent);
+}
+
+/* =====================
+   PROJECT PAGES
+   ===================== */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  transition: color 0.15s;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.project-header {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.project-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.project-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 20px;
+  padding: 0.15rem 0.75rem;
+  font-size: 0.73rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.project-hero-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 2rem 0;
+  display: block;
+}
+
+/* =====================
+   PROJECT SECTIONS
+   ===================== */
+
+.project-section {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.project-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.project-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.decision-block {
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.decision-block:last-child {
+  margin-bottom: 0;
+}
+
+.screenshot {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  display: block;
+  margin: 1.5rem 0;
+}
+
+.screenshot-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 600px) {
+  .screenshot-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+.screenshot-pair .screenshot {
+  margin: 0;
+}
+
+.project-footer-note {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 0 3rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* =====================
+   HAND-DRAWN SVG HELPERS
+   ===================== */
+
+.wavy-underline {
+  display: block;
+  overflow: visible;
+  margin-bottom: 0.8rem;
+}
+
+.heading-underline {
+  display: block;
+  overflow: visible;
+  margin-top: 3px;
+}
+
+.arrow-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.dot-divider {
+  display: block;
+  overflow: visible;
+  margin-bottom: 1.2rem;
+}
+
+/* =====================
+   MOBILE
+   ===================== */
+
+@media (max-width: 500px) {
+  body {
+    font-size: 16px;
+  }
+
+  .hero {
+    padding: 3rem 0 2rem;
+  }
+
+  .hero-name {
+    font-size: 2.2rem;
+  }
+
+  .section {
+    padding: 2rem 0;
+  }
+
+  .project-header {
+    padding-bottom: 1.5rem;
+  }
+
+  .project-section {
+    padding: 1.8rem 0;
+  }
+
+  .back-link {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-hero-img {
+    margin: 1.5rem 0;
+  }
+}
