@@ -284,6 +284,23 @@
             <p class="text-lg text-on-surface-variant leading-relaxed">Whisper.cpp for transcription from the browser, Kokoro TTS for spoken responses. Math is spoken via the same accessibility pipeline MathJax uses for screen readers (Speech Rule Engine with ClearSpeak). Accuracy disclaimer permanently visible; one-time-per-session acknowledgment modal before any AI interaction.</p>
           </div>
         </div>
+
+        <!-- Design system -->
+        <div class="flex flex-col md:flex-row-reverse gap-16 items-center">
+          <div class="w-full md:w-1/2 grid grid-cols-2 gap-3">
+            <div class="p-2 bg-surface-container-high rounded-xl shadow-sm">
+              <img class="rounded-xl w-full" src="/assets/chalkboardai-claude-design-system.png" alt="ChalkboardAI design system light mode, built with Claude Code">
+            </div>
+            <div class="p-2 bg-surface-container-high rounded-xl shadow-sm">
+              <img class="rounded-xl w-full" src="/assets/chalkboardai-design-system-dark.png" alt="ChalkboardAI design system dark mode">
+            </div>
+          </div>
+          <div class="w-full md:w-1/2">
+            <span class="text-xs font-bold text-tertiary uppercase tracking-widest mb-4 block">Design system</span>
+            <h3 class="font-headline text-3xl font-bold mb-6">Tokens, type, and modes built with Claude Code</h3>
+            <p class="text-lg text-on-surface-variant leading-relaxed">The design foundation was built collaboratively with Claude Code: color tokens, type scale, and component variants across light and dark modes. Treating the design system as a documented artifact rather than ad-hoc styles meant every new screen started from a consistent base.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -304,6 +321,10 @@
           </div>
           <div class="bg-surface/10 backdrop-blur-sm border border-white/10 rounded-xl p-8">
             <h3 class="font-headline text-xl font-bold text-on-tertiary mb-4">Inline chat artifacts over a duplicated help zone</h3>
+            <div class="rounded-xl overflow-hidden mb-4 opacity-80">
+              <img class="w-full" src="/assets/chalkboardai-figma-restructure.png" alt="Figma wireframe showing the earlier layout with a separate AI help canvas on the left sidebar">
+              <p class="text-xs text-on-tertiary/50 italic p-2">The earlier layout: AI-generated items appear in a separate left panel (the "help canvas") alongside the chat.</p>
+            </div>
             <p class="text-xs font-bold text-on-tertiary/50 uppercase tracking-widest mb-1">The problem</p>
             <p class="text-on-tertiary/80 leading-relaxed text-sm mb-4">An early version had a top-of-sidebar "help canvas" where AI-generated math items appeared.</p>
             <p class="text-xs font-bold text-on-tertiary/50 uppercase tracking-widest mb-1">The observation</p>
