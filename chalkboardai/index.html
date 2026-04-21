@@ -353,6 +353,24 @@
             <p class="text-on-tertiary/80 leading-relaxed text-sm">Delete the bespoke pipeline. About 300KB of bundle size for correct, broad coverage without hand-authoring. When an accessibility-aware library exists and works, it wins by default.</p>
           </div>
         </div>
+        <div class="bg-surface/10 backdrop-blur-sm border border-white/10 rounded-xl p-8 mt-6">
+          <h3 class="font-headline text-xl font-bold text-on-tertiary mb-4">Routing math computation through a verified solver</h3>
+          <p class="text-xs font-bold text-on-tertiary/50 uppercase tracking-widest mb-1">The problem</p>
+          <p class="text-on-tertiary/80 leading-relaxed text-sm mb-4">The base LLM could not be trusted to do arithmetic. On the same problem — find the limit of f(x) = 12 − 5x as x approaches 2 (answer: 2) — it returned 7, then 3, then −8 in a single session. A math tutor that gets the math wrong is worse than no tutor at all.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="rounded-xl overflow-hidden opacity-80">
+              <img class="w-full" src="/assets/chalkboardai-llm-before-2.jpg" alt="Early LLM chat: model confidently gives wrong answer of 7 for a limit, then recalculates to 3">
+            </div>
+            <div class="rounded-xl overflow-hidden opacity-80">
+              <img class="w-full" src="/assets/chalkboardai-llm-before-1.jpg" alt="Early LLM chat: model revises again to -8, student asks why it got it wrong, model apologizes">
+            </div>
+          </div>
+          <p class="text-xs text-on-tertiary/50 italic mb-4">Three different wrong answers in one session. The correct answer is 2.</p>
+          <p class="text-xs font-bold text-on-tertiary/50 uppercase tracking-widest mb-1">What I rejected</p>
+          <p class="text-on-tertiary/80 leading-relaxed text-sm mb-4">Relying on better prompting alone. The arithmetic failures weren't hallucination in the usual sense — they were the model not having a reliable computation mechanism. Prompting couldn't fix that.</p>
+          <p class="text-xs font-bold text-on-tertiary/50 uppercase tracking-widest mb-1">What I landed on</p>
+          <p class="text-on-tertiary/80 leading-relaxed text-sm">Connected the model to a math solver for computation, so the LLM handles reasoning and explanation while verified tool calls handle the arithmetic. The model went from three wrong answers on one problem to consistent accuracy on the same class of questions.</p>
+        </div>
       </div>
     </section>
 
