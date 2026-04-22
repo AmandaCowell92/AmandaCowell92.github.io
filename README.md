@@ -2,7 +2,7 @@
 
 Personal portfolio site for Amanda L. Cowell — product manager, technologist, and math teacher.
 
-Live at: https://AmandaCowell92.github.io
+Live at: https://HiAmandaCowell.github.io
 
 ## Structure
 
