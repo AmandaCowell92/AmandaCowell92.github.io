@@ -8,218 +8,397 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "surface-container-high": "#D8D3CB",
-            "primary-fixed": "#b9ebf2",
-            "on-surface": "#1C1714",
-            "on-secondary-fixed-variant": "#384b3c",
-            "outline-variant": "#C5BFBA",
-            "on-secondary-container": "#546757",
-            "surface-container-low": "#EDE9E2",
-            "on-secondary-fixed": "#0d1f12",
-            "primary": "#26585d",
-            "surface-container": "#E3DFD7",
-            "on-primary-container": "#c0f2f8",
-            "on-primary": "#ffffff",
-            "secondary": "#4f6353",
-            "primary-container": "#407076",
-            "surface": "#FAF7F2",
-            "primary-fixed-dim": "#9ecfd5",
-            "on-tertiary": "#ffffff",
-            "secondary-fixed": "#d2e8d3",
-            "surface-container-highest": "#CEC9C0",
-            "secondary-container": "#cfe5d0",
-            "on-primary-fixed": "#001f23",
-            "secondary-fixed-dim": "#b6ccb8",
-            "on-surface-variant": "#4A4440",
-            "tertiary": "#554d65",
-            "on-secondary": "#ffffff",
-            "tertiary-container": "#6d657e",
-            "on-primary-fixed-variant": "#1a4e53",
-            "inverse-primary": "#9ecfd5",
-            "surface-container-lowest": "#F4F1EC",
-            "outline": "#7A7470",
-            "surface-dim": "#D0CBC4",
-            "accent": "#B05C1A"
-          },
-          borderRadius: {
-            "DEFAULT": "0.125rem",
-            "lg": "0.25rem",
-            "xl": "0.5rem",
-            "full": "9999px"
-          },
-          fontFamily: {
-            "headline": ["Fraunces", "Georgia", "serif"],
-            "body": ["Inter", "system-ui", "sans-serif"],
-            "label": ["Inter", "system-ui", "sans-serif"]
-          }
-        }
-      }
-    }
-  </script>
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .field-navy-top{background:#2F3D63;color:#ECE8E1;margin-top:-8vw;padding-top:calc(8vw + 5rem);padding-bottom:5rem;position:relative;z-index:1;clip-path:polygon(0 8vw,100% 0,100% 100%,0 100%)}
-    .field-navy-bottom{background:#2F3D63;color:#ECE8E1;padding-top:5rem;padding-bottom:calc(8vw + 5rem);margin-bottom:-8vw;position:relative;z-index:1;clip-path:polygon(0 0,100% 0,100% calc(100% - 8vw),0 100%)}
-    .field-navy-both{background:#2F3D63;color:#ECE8E1;margin-top:-8vw;margin-bottom:-8vw;padding-top:calc(8vw + 5rem);padding-bottom:calc(8vw + 5rem);position:relative;z-index:1;clip-path:polygon(0 8vw,100% 0,100% calc(100% - 8vw),0 100%)}
-    .field-rose-top{background:#B8796A;color:#ECE8E1;margin-top:-8vw;padding-top:calc(8vw + 5rem);padding-bottom:5rem;position:relative;z-index:1;clip-path:polygon(0 8vw,100% 0,100% 100%,0 100%)}
-    .field-rose-bottom{background:#B8796A;color:#ECE8E1;padding-top:5rem;padding-bottom:calc(8vw + 5rem);margin-bottom:-8vw;position:relative;z-index:1;clip-path:polygon(0 0,100% 0,100% calc(100% - 8vw),0 100%)}
-    .field-rose-both{background:#B8796A;color:#ECE8E1;margin-top:-8vw;margin-bottom:-8vw;padding-top:calc(8vw + 5rem);padding-bottom:calc(8vw + 5rem);position:relative;z-index:1;clip-path:polygon(0 8vw,100% 0,100% calc(100% - 8vw),0 100%)}
-    .section-num{font-family:'Fraunces',Georgia,serif;font-size:4.5rem;color:#26585d;font-weight:400;line-height:1;display:block;margin-bottom:.5rem}
-    .field-navy-top .section-num,.field-navy-bottom .section-num,.field-navy-both .section-num,.field-rose-top .section-num,.field-rose-bottom .section-num,.field-rose-both .section-num{color:#ECE8E1}
-    @media(max-width:768px){.field-navy-top,.field-navy-bottom,.field-navy-both,.field-rose-top,.field-rose-bottom,.field-rose-both{clip-path:none;margin-top:0;margin-bottom:0}}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #ECE8E1;
+      --ink: #1C2333;
+      --forest: #26585d;
+      --rose: #B8796A;
+      --navy: #2F3D63;
+      --stone: #94928F;
+      --cut: 14px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #FAF7F2;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      position: fixed; top: 0; width: 100%; z-index: 50;
+      background: rgba(250,247,242,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(197,191,186,0.4);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 16px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-wordmark {
+      font-family: 'Fraunces', serif; font-weight: 400; font-size: 18px;
+      color: var(--forest); text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-link {
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--stone);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-link:hover { color: var(--ink); }
+    .nav-link-active {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      color: var(--forest); text-decoration: none;
+      border-bottom: 1px solid var(--forest); padding-bottom: 2px;
+    }
+    .nav-cta {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      color: #fff; background: var(--forest);
+      padding: 8px 20px; border-radius: 9999px; text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ── Section label ── */
+    .section-label {
+      font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone);
+      display: inline-flex; align-items: center; gap: 14px;
+    }
+    .section-label::before {
+      content: ""; display: block; width: 40px; height: 1px; background: var(--stone);
+    }
+
+    /* ── Hero ── */
+    .hero-section {
+      max-width: 1280px; margin: 0 auto;
+      padding: 120px 40px 80px;
+    }
+    .hero-piece-1 { position: relative; margin-right: 12%; }
+    .hero-piece-1 svg { width: 100%; height: auto; display: block; }
+    .hero-piece-1-content {
+      position: absolute; inset: 0;
+      display: flex; align-items: center;
+      padding: 0 72px;
+    }
+    .hero-title {
+      font-family: 'Fraunces', serif; font-weight: 400;
+      font-size: clamp(48px, 8.5vw, 124px); line-height: 0.9;
+      letter-spacing: -0.035em; color: var(--cream);
+    }
+    .hero-piece-2 {
+      position: relative;
+      margin-top: var(--cut); margin-left: 18%;
+      max-width: 720px;
+    }
+    .hero-piece-2 svg { width: 100%; height: auto; display: block; }
+    .hero-piece-2-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 36px 52px;
+    }
+
+    /* ── About ── */
+    .about-section {
+      max-width: 1280px; margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .about-inner { max-width: 680px; }
+    .about-body {
+      font-size: 18px; line-height: 1.7; color: var(--ink);
+      margin-top: 28px;
+    }
+    .about-body p + p { margin-top: 18px; }
+    .about-footer {
+      margin-top: 28px; font-size: 14px; color: var(--stone);
+    }
+    .text-link {
+      color: var(--forest); text-decoration: none;
+    }
+    .text-link:hover { text-decoration: underline; }
+
+    /* ── Projects ── */
+    .projects-section {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 40px 100px;
+    }
+    .projects-label { margin-bottom: 40px; }
+    .project {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--cut);
+    }
+    .project + .project { margin-top: 48px; }
+
+    .project-shape { position: relative; aspect-ratio: 600 / 440; }
+    .project-shape svg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+    }
+    .project-body-content {
+      position: absolute; inset: 0;
+      padding: 52px 56px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+
+    .project-index {
+      font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
+      font-size: 13px; color: var(--stone); display: block; margin-bottom: 14px;
+    }
+    .project-index-light {
+      font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
+      font-size: 13px; color: rgba(236,232,225,0.55); display: block; margin-bottom: 14px;
+    }
+    .project-title-ink {
+      font-family: 'Fraunces', serif; font-weight: 400;
+      font-size: clamp(26px, 3vw, 44px); line-height: 1.05;
+      letter-spacing: -0.02em; color: var(--ink);
+    }
+    .project-title-cream {
+      font-family: 'Fraunces', serif; font-weight: 400;
+      font-size: clamp(26px, 3vw, 44px); line-height: 1.05;
+      letter-spacing: -0.02em; color: var(--cream);
+    }
+    .project-desc-ink {
+      font-size: 15px; line-height: 1.65; color: var(--ink);
+      opacity: 0.72; margin-top: 14px;
+    }
+    .project-desc-cream {
+      font-size: 15px; line-height: 1.65; color: var(--cream);
+      opacity: 0.82; margin-top: 14px;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+    .tag-cream {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+      padding: 3px 9px; border-radius: 2px;
+      background: rgba(28,35,51,0.07); color: var(--ink);
+    }
+    .tag-navy {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+      padding: 3px 9px; border-radius: 2px;
+      background: rgba(255,255,255,0.12); color: var(--cream);
+    }
+    .project-link {
+      font-family: 'Fraunces', serif; font-style: italic; font-size: 15px;
+      color: var(--forest); text-decoration: none;
+    }
+    .project-link:hover { text-decoration: underline; }
+    .project-link-light {
+      font-family: 'Fraunces', serif; font-style: italic; font-size: 15px;
+      color: var(--cream); text-decoration: none; opacity: 0.8;
+    }
+    .project-link-light:hover { opacity: 1; text-decoration: underline; }
+
+    /* ── Footer ── */
+    .footer {
+      background: #1a3a36; padding: 48px 40px;
+    }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-text {
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      color: rgba(236,232,225,0.45);
+    }
+    .footer-link {
+      font-family: 'Inter', sans-serif; font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(236,232,225,0.65); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-link:hover { color: rgba(236,232,225,0.9); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .nav-inner { padding: 16px 24px; }
+      .hero-section { padding: 100px 24px 60px; }
+      .hero-piece-1 { margin-right: 0; }
+      .hero-piece-2 { margin-left: 0; max-width: 100%; }
+      .hero-piece-1-content { padding: 0 40px; }
+      .hero-piece-2-content { padding: 28px 36px; }
+      .about-section, .projects-section { padding-left: 24px; padding-right: 24px; }
+      .project { grid-template-columns: 1fr; }
+      .footer { padding: 40px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { gap: 16px; }
+      .hero-piece-1-content { padding: 0 28px; }
+      .hero-piece-2-content { padding: 22px 28px; }
+      .project-body-content { padding: 36px 36px; }
+    }
   </style>
 </head>
-<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<body>
 
   <!-- Nav -->
-  <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/40">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="/" class="font-headline text-xl font-semibold text-primary tracking-tight">Amanda L. Cowell</a>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="/" class="text-primary font-medium border-b-2 border-primary pb-0.5 text-sm">Home</a>
-        <a href="/#projects" class="text-on-surface-variant hover:text-primary transition-colors text-sm">Work</a>
-        <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="bg-primary text-on-primary px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">LinkedIn</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-wordmark">Amanda L. Cowell</a>
+      <div class="nav-links">
+        <a href="/" class="nav-link-active">Home</a>
+        <a href="/#projects" class="nav-link">Work</a>
+        <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="nav-cta">LinkedIn</a>
       </div>
-      <span class="md:hidden material-symbols-outlined text-primary cursor-pointer">menu</span>
     </div>
   </nav>
 
-  <main class="pt-20">
+  <main>
 
-    <!-- Hero -->
-    <section class="max-w-7xl mx-auto px-6 py-24 md:py-36 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-      <div class="lg:col-span-8">
-        <h1 class="font-headline text-6xl md:text-8xl font-semibold tracking-tighter text-primary leading-none mb-8">
-          Amanda L. Cowell
-        </h1>
-        <div class="space-y-4 text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-2xl mb-8">
-          <p>I'm a product manager with a math background. I lead XR and AI projects at the University of Michigan during the week, teach calculus and statistics at Washtenaw Community College on the side, and prototype tools of my own on the weekends.</p>
-          <p>I came to product from mathematics, and I stayed because I like the puzzle of tradeoffs: scope, sequencing, and where user reality should shape the plan.</p>
-        </div>
-        <div class="flex flex-col gap-1.5 mb-10 text-sm text-on-surface-variant">
-          <p><span class="font-medium text-on-surface">Product Manager, Experiential Technologies</span> at U-M Center for Academic Innovation.</p>
-          <p>Also teaching math at Washtenaw Community College.</p>
-        </div>
-        <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-primary border border-outline-variant rounded-full px-5 py-2 hover:bg-surface-container-low transition-colors">
-          LinkedIn
-        </a>
-      </div>
-      <div class="lg:col-span-4">
-        <div class="rounded-xl overflow-hidden aspect-[3/4]">
-          <img src="/assets/headshot.jpg" alt="Amanda Cowell, product manager and math instructor" class="w-full h-full object-cover object-[50%_15%]">
+    <!-- ── Hero ── -->
+    <section class="hero-section">
+
+      <!-- Piece 1: name (rose) — 1100 × 340 -->
+      <div class="hero-piece-1">
+        <svg viewBox="0 0 1100 340" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 80,0 L 1020,0 C 1070,0 1100,35 1100,90 L 1100,260 C 1100,305 1070,340 1020,340 L 80,340 C 35,340 0,305 0,260 L 0,90 C 0,40 35,0 80,0 Z" fill="#B8796A"/>
+        </svg>
+        <div class="hero-piece-1-content">
+          <h1 class="hero-title">Amanda&nbsp;L.<br>Cowell</h1>
         </div>
       </div>
+
+      <!-- Piece 2: bio (rose) — 720 × 220 -->
+      <div class="hero-piece-2">
+        <svg viewBox="0 0 720 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 60,0 L 660,0 C 700,0 720,24 720,60 L 720,160 C 720,196 700,220 660,220 L 60,220 C 22,220 0,196 0,160 L 0,60 C 0,24 22,0 60,0 Z" fill="#B8796A"/>
+        </svg>
+        <div class="hero-piece-2-content">
+          <p style="font-size:clamp(14px,1.4vw,17px);line-height:1.65;color:var(--cream);">Product manager with a math background. I lead XR and AI projects at the University of Michigan, teach calculus and statistics at Washtenaw Community College, and prototype tools of my own on the weekends.</p>
+          <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:18px;font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--cream);text-decoration:none;opacity:0.8;">LinkedIn &#8594;</a>
+        </div>
+      </div>
+
     </section>
 
-    <!-- About -->
-    <section class="bg-surface-container-low py-24">
-      <div class="max-w-3xl mx-auto px-6">
-        <h2 class="font-headline text-5xl md:text-6xl font-semibold text-on-surface mb-8">About</h2>
-        <div class="space-y-5 text-lg leading-relaxed text-on-surface-variant">
-          <p>I work best on small teams that are trying to figure something out. Most of my work lives at the intersection of emerging technology and learning, which means a lot of "we think this could matter, but nobody's sure yet." Getting those calls right takes digging in until you understand both the technical shape and the human shape of the problem.</p>
+    <!-- ── About ── -->
+    <section class="about-section">
+      <div class="about-inner">
+        <span class="section-label">About</span>
+        <div class="about-body">
+          <p>I work best on small teams that are trying to figure something out. Most of my work lives at the intersection of emerging technology and learning — a lot of "we think this could matter, but nobody's sure yet." Getting those calls right takes digging in until you understand both the technical shape and the human shape of the problem.</p>
           <p>I come to product from mathematics, which turns out to be a real asset. I can hold a technical conversation with engineers and translate it for non-technical clients, sharpened by teaching calculus and statistics to 500+ students a semester. I prototype my own tools with Claude Code, because being hands-on keeps me honest about what's realistic to ask of a team.</p>
         </div>
-        <p class="mt-8 text-sm text-on-surface-variant">The full timeline is on <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">LinkedIn</a>.</p>
+        <p class="about-footer">The full timeline is on <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="text-link">LinkedIn</a>.</p>
       </div>
     </section>
 
-    <!-- Selected Work heading field -->
-    <section id="projects" class="field-navy-top">
-      <div class="max-w-7xl mx-auto px-6">
-        <h2 class="font-headline text-5xl md:text-6xl font-semibold tracking-tight">Selected Work</h2>
-      </div>
-    </section>
+    <!-- ── Selected Work ── -->
+    <section id="projects" class="projects-section">
 
-    <!-- Project bands -->
-    <section class="pb-32">
-
-      <!-- ChalkboardAI (image left) -->
-      <div class="group border-t border-outline-variant/40">
-        <div class="flex flex-col lg:flex-row items-stretch">
-          <a href="/chalkboardai/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/chalkboardai-hero-still.jpg" alt="ChalkboardAI interface showing the infinite canvas with a math problem and AI tutor chat panel">
-          </a>
-          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
-            <div>
-              <h3 class="font-headline text-3xl font-semibold text-on-surface mb-4">ChalkboardAI</h3>
-              <p class="text-on-surface-variant leading-relaxed text-lg">Local-first AI math tutoring grounded in the specific lecture a student is studying. Entirely offline for FERPA and FOIA compliance, running on a Mac Studio. A self-directed prototype I built to figure out what's actually possible in institutional AI.</p>
-            </div>
-            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">React</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">TypeScript</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Ollama</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">local RAG</span>
-              <span class="text-outline mx-1">·</span>
-              <span class="text-secondary font-medium">Self-directed</span>
-              <span class="text-outline mx-0.5">·</span>
-              <span class="text-secondary font-medium">In development</span>
-            </div>
-            <a href="/chalkboardai/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
-              Read the case study <span aria-hidden="true">&#8594;</span>
-            </a>
-          </div>
-        </div>
+      <div class="projects-label">
+        <span class="section-label">Selected Work</span>
       </div>
 
-      <!-- Piano Lab Pro (image right) -->
-      <div class="group border-t border-outline-variant/40">
-        <div class="flex flex-col lg:flex-row-reverse items-stretch">
-          <a href="/piano-lab-pro/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/plp-hero-thumb.jpg" alt="Piano Lab Pro in mixed reality with a musician performing in a virtual concert hall">
-          </a>
-          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
+      <!-- 01 ChalkboardAI: cream body (left) + navy image (right) -->
+      <div class="project">
+
+        <div class="project-shape">
+          <svg viewBox="0 0 600 440" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 100,0 L 560,0 C 585,0 600,18 600,45 L 600,395 C 600,422 585,440 560,440 L 100,440 C 45,440 0,395 0,340 L 0,100 C 0,45 45,0 100,0 Z" fill="#ECE8E1"/>
+          </svg>
+          <div class="project-body-content">
             <div>
-              <h3 class="font-headline text-3xl font-semibold text-on-surface mb-4">Piano Lab Pro</h3>
-              <p class="text-on-surface-variant leading-relaxed text-lg">Mixed reality performance preparation on Apple Vision Pro, built with a fifteen-person cross-functional team at U-M's Center for Academic Innovation and the School of Music, Theatre &amp; Dance. Two years from discovery to MVP.</p>
+              <span class="project-index">01 · ChalkboardAI</span>
+              <h2 class="project-title-ink">ChalkboardAI</h2>
+              <p class="project-desc-ink">Local-first AI math tutoring grounded in the specific lecture a student is studying. Entirely offline for FERPA compliance, running on a Mac Studio. A self-directed prototype built to figure out what's actually possible in institutional AI.</p>
+              <div class="project-tags">
+                <span class="tag-cream">React</span>
+                <span class="tag-cream">TypeScript</span>
+                <span class="tag-cream">Ollama</span>
+                <span class="tag-cream">local RAG</span>
+                <span class="tag-cream">Self-directed</span>
+              </div>
             </div>
-            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Apple Vision Pro</span>
-              <span class="text-outline mx-1">·</span>
-              <span class="text-secondary font-medium">Product Manager</span>
-              <span class="text-outline mx-0.5">·</span>
-              <span class="text-secondary font-medium">MVP June 2026</span>
-            </div>
-            <a href="/piano-lab-pro/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
-              Read the case study <span aria-hidden="true">&#8594;</span>
-            </a>
+            <a href="/chalkboardai/" class="project-link">Read the case study &#8594;</a>
           </div>
         </div>
+
+        <div class="project-shape">
+          <svg viewBox="0 0 600 440" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="cp-chalk">
+                <path d="M 40,0 L 500,0 C 555,0 600,45 600,100 L 600,340 C 600,395 555,440 500,440 L 40,440 C 15,440 0,422 0,395 L 0,45 C 0,18 15,0 40,0 Z"/>
+              </clipPath>
+            </defs>
+            <image href="/assets/chalkboardai-hero-still.jpg" x="0" y="0" width="600" height="440" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp-chalk)"/>
+          </svg>
+        </div>
+
       </div>
 
-      <!-- Acorns of Wisdom (image left) -->
-      <div class="group border-t border-outline-variant/40 border-b border-outline-variant/40">
-        <div class="flex flex-col lg:flex-row items-stretch">
-          <a href="/acorns/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/acorns-hero.gif" alt="Acorns of Wisdom dashboard with team ratings and animated squirrel">
-          </a>
-          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
+      <!-- 02 Piano Lab Pro: image (left) + navy body (right) -->
+      <div class="project">
+
+        <div class="project-shape">
+          <svg viewBox="0 0 600 440" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="cp-plp">
+                <path d="M 100,0 L 560,0 C 585,0 600,18 600,45 L 600,395 C 600,422 585,440 560,440 L 100,440 C 45,440 0,395 0,340 L 0,100 C 0,45 45,0 100,0 Z"/>
+              </clipPath>
+            </defs>
+            <image href="/assets/plp-hero-thumb.jpg" x="0" y="0" width="600" height="440" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp-plp)"/>
+          </svg>
+        </div>
+
+        <div class="project-shape">
+          <svg viewBox="0 0 600 440" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 40,0 L 500,0 C 555,0 600,45 600,100 L 600,340 C 600,395 555,440 500,440 L 40,440 C 15,440 0,422 0,395 L 0,45 C 0,18 15,0 40,0 Z" fill="#2F3D63"/>
+          </svg>
+          <div class="project-body-content">
             <div>
-              <h3 class="font-headline text-3xl font-semibold text-on-surface mb-4">Acorns of Wisdom</h3>
-              <p class="text-on-surface-variant leading-relaxed text-lg">A team health check web app I built for my own team in two weeks, deployed, and still in use. Anonymous ratings, passcode protection, drag-and-drop action items, and an animated squirrel.</p>
+              <span class="project-index-light">02 · Piano Lab Pro</span>
+              <h2 class="project-title-cream">Piano Lab Pro</h2>
+              <p class="project-desc-cream">Mixed reality performance preparation on Apple Vision Pro, built with a fifteen-person cross-functional team at U-M's Center for Academic Innovation and the School of Music, Theatre &amp; Dance. Two years from discovery to MVP.</p>
+              <div class="project-tags">
+                <span class="tag-navy">Apple Vision Pro</span>
+                <span class="tag-navy">Product Manager</span>
+                <span class="tag-navy">MVP June 2026</span>
+              </div>
             </div>
-            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">React</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Firebase</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Vercel</span>
-              <span class="text-outline mx-1">·</span>
-              <span class="text-secondary font-medium">Self-directed</span>
-              <span class="text-outline mx-0.5">·</span>
-              <span class="text-secondary font-medium">Shipped</span>
-            </div>
-            <a href="/acorns/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
-              Read the case study <span aria-hidden="true">&#8594;</span>
-            </a>
+            <a href="/piano-lab-pro/" class="project-link-light">Read the case study &#8594;</a>
           </div>
         </div>
+
+      </div>
+
+      <!-- 03 Acorns of Wisdom: cream body (left) + rose image (right) -->
+      <div class="project">
+
+        <div class="project-shape">
+          <svg viewBox="0 0 600 440" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 100,0 L 560,0 C 585,0 600,18 600,45 L 600,395 C 600,422 585,440 560,440 L 100,440 C 45,440 0,395 0,340 L 0,100 C 0,45 45,0 100,0 Z" fill="#ECE8E1"/>
+          </svg>
+          <div class="project-body-content">
+            <div>
+              <span class="project-index">03 · Acorns of Wisdom</span>
+              <h2 class="project-title-ink">Acorns of Wisdom</h2>
+              <p class="project-desc-ink">A team health check web app built for my own team in two weeks, deployed, and still in use. Anonymous ratings, passcode protection, drag-and-drop action items, and an animated squirrel.</p>
+              <div class="project-tags">
+                <span class="tag-cream">React</span>
+                <span class="tag-cream">Firebase</span>
+                <span class="tag-cream">Vercel</span>
+                <span class="tag-cream">Self-directed</span>
+                <span class="tag-cream">Shipped</span>
+              </div>
+            </div>
+            <a href="/acorns/" class="project-link">Read the case study &#8594;</a>
+          </div>
+        </div>
+
+        <div class="project-shape">
+          <svg viewBox="0 0 600 440" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="cp-acorns">
+                <path d="M 40,0 L 500,0 C 555,0 600,45 600,100 L 600,340 C 600,395 555,440 500,440 L 40,440 C 15,440 0,422 0,395 L 0,45 C 0,18 15,0 40,0 Z"/>
+              </clipPath>
+            </defs>
+            <image href="/assets/acorns-hero.gif" x="0" y="0" width="600" height="440" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp-acorns)"/>
+          </svg>
+        </div>
+
       </div>
 
     </section>
@@ -227,10 +406,10 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-teal-900 w-full py-12">
-    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-      <p class="text-teal-100/50 text-sm">Powered by coffee.</p>
-      <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="text-teal-100/70 hover:text-teal-50 text-sm uppercase tracking-wide transition-colors">LinkedIn</a>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-text">Powered by coffee.</p>
+      <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
     </div>
   </footer>
 
