@@ -67,6 +67,21 @@
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    @media (max-width: 767px) {
+      .nav-menu.is-open {
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #FAF7F2;
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(197,191,186,0.4);
+      }
+    }
   </style>
 </head>
 <body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -75,13 +90,13 @@
   <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/40">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="/" class="font-headline text-xl font-semibold text-primary tracking-tight">Amanda L. Cowell</a>
-      <div class="hidden md:flex items-center gap-3 text-sm">
+      <div id="nav-menu" class="nav-menu hidden md:flex items-center gap-3 text-sm">
         <a href="/" class="text-on-surface-variant hover:text-primary transition-colors">Home</a>
         <span class="text-outline">/</span>
         <span class="text-on-surface font-medium">Acorns of Wisdom</span>
         <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="ml-5 bg-primary text-on-primary px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">LinkedIn</a>
       </div>
-      <span class="md:hidden material-symbols-outlined text-primary cursor-pointer">menu</span>
+      <button id="nav-toggle" type="button" aria-label="Toggle menu" class="md:hidden material-symbols-outlined text-primary cursor-pointer bg-transparent border-0 p-0">menu</button>
     </div>
   </nav>
 
@@ -278,6 +293,12 @@
       <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="text-teal-100/70 hover:text-teal-50 text-sm uppercase tracking-wide transition-colors">LinkedIn</a>
     </div>
   </footer>
+
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.toggle('is-open');
+    });
+  </script>
 
 </body>
 </html>
