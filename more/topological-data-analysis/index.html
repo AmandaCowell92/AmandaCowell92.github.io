@@ -107,45 +107,39 @@
 
   <main class="pt-24 pb-20">
 
-    <!-- Header: title + metadata sidebar -->
+    <!-- Header: title full width, metadata row below -->
     <header class="max-w-7xl mx-auto px-6 py-16 md:py-24">
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start mb-16">
+      <!-- Title -->
+      <h1 class="font-headline text-5xl md:text-7xl font-semibold text-primary tracking-tighter leading-[1.05] mb-10 md:mb-12">
+        Topological Data Analysis: Tools and Some Applications
+      </h1>
 
-        <!-- Title -->
-        <div class="lg:col-span-8">
-          <h1 class="font-headline text-5xl md:text-7xl font-semibold text-primary tracking-tighter leading-[1.05]">
-            Topological Data Analysis: Tools and Some Applications
-          </h1>
+      <!-- Metadata row: 4 cards across -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
+        <div class="p-5 bg-surface-container-low rounded-xl">
+          <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Degree</span>
+          <p class="font-medium text-on-surface">Master of Arts in Mathematics</p>
         </div>
-
-        <!-- Metadata sidebar -->
-        <div class="lg:col-span-4 flex flex-col gap-3">
-          <div class="p-5 bg-surface-container-low rounded-xl">
-            <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Degree</span>
-            <p class="font-medium text-on-surface">Master of Arts in Mathematics</p>
-          </div>
-          <div class="p-5 bg-surface-container-low rounded-xl">
-            <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Institution</span>
-            <p class="font-medium text-on-surface">University of Toledo</p>
-          </div>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="p-5 bg-surface-container-low rounded-xl">
-              <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Year</span>
-              <p class="font-medium text-on-surface">2021</p>
-            </div>
-            <div class="p-5 bg-surface-container-low rounded-xl">
-              <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Advisor</span>
-              <p class="font-medium text-on-surface">Dr. Funda Gültepe</p>
-            </div>
-          </div>
-          <a href="http://rave.ohiolink.edu/etdc/view?acc_num=toledo1620579529905963" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 mt-1 bg-primary text-on-primary px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
-            Read on OhioLINK
-            <span aria-hidden="true">↗</span>
-          </a>
+        <div class="p-5 bg-surface-container-low rounded-xl">
+          <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Institution</span>
+          <p class="font-medium text-on-surface">University of Toledo</p>
         </div>
-
+        <div class="p-5 bg-surface-container-low rounded-xl">
+          <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Year</span>
+          <p class="font-medium text-on-surface">2021</p>
+        </div>
+        <div class="p-5 bg-surface-container-low rounded-xl">
+          <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Advisor</span>
+          <p class="font-medium text-on-surface">Dr. Funda Gültepe</p>
+        </div>
       </div>
+
+      <!-- OhioLINK CTA -->
+      <a href="http://rave.ohiolink.edu/etdc/view?acc_num=toledo1620579529905963" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mb-16 bg-primary text-on-primary px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
+        Read on OhioLINK
+        <span aria-hidden="true">↗</span>
+      </a>
 
       <!-- About the thesis -->
       <div class="max-w-3xl mb-10">
