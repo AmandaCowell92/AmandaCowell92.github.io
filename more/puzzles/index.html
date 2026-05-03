@@ -141,12 +141,12 @@
       </div>
     </section>
 
-    <!-- Zone 2: prose + screenshots (smaller right column so screenshots act as accents) -->
+    <!-- Zone 2: prose stretches to fill, screenshots fixed at 240px on the right -->
     <section class="max-w-7xl mx-auto px-6 mb-16 md:mb-20">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-8 lg:gap-12 items-start">
 
-        <!-- Prose (col 8) -->
-        <div class="lg:col-span-8">
+        <!-- Prose (1fr) -->
+        <div>
           <div class="text-lg leading-relaxed text-on-surface-variant">
             <p>For nearly a year, my team and I have started every standup by playing a puzzle together. Usually it's <a href="https://www.nytimes.com/games/connections" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">NYT Connections</a>. Sometimes it's the <a href="https://www.theatlantic.com/games/bracket-city/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Atlantic's Bracket City</a> or <a href="https://costcodle.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Costcodle</a>. We share a screen, we throw out guesses, we argue about categories, and then we get to work.</p>
 
@@ -163,23 +163,23 @@
           </div>
         </div>
 
-        <!-- Screenshots (col 4, capped at ~240px so they read as accents, not features) -->
-        <div class="lg:col-span-4 space-y-5 md:space-y-6">
-          <figure class="max-w-[240px]">
+        <!-- Screenshots (fixed 240px column, right-aligned to match the page edge) -->
+        <div class="space-y-5 md:space-y-6">
+          <figure>
             <div class="rounded-xl overflow-hidden bg-surface-container-low">
               <img src="/assets/puzzles-queens.jpg" alt="LinkedIn Queens completion screen showing a 562-day win streak" class="w-full h-auto block">
             </div>
             <!-- Queens streak date — update by hand -->
             <figcaption class="text-xs italic text-on-surface-variant mt-2">As of May 2026</figcaption>
           </figure>
-          <figure class="max-w-[240px]">
+          <figure>
             <div class="rounded-xl overflow-hidden bg-surface-container-low">
               <img src="/assets/puzzles-tango.jpg" alt="LinkedIn Tango completion screen showing a 562-day win streak" class="w-full h-auto block">
             </div>
             <!-- Tango streak date — update by hand -->
             <figcaption class="text-xs italic text-on-surface-variant mt-2">As of May 2026</figcaption>
           </figure>
-          <figure class="max-w-[240px]">
+          <figure>
             <div class="rounded-xl overflow-hidden bg-surface-container-low">
               <img src="/assets/puzzles-minisudoku.jpg" alt="LinkedIn Mini Sudoku completion screen showing a 261-day win streak" class="w-full h-auto block">
             </div>
