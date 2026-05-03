@@ -277,7 +277,7 @@
           <img src="/assets/vibez-original.jpg" alt="Vibez dashboard at FordLabs, the original team health check tool" class="block rounded-lg w-full md:max-h-[360px] md:w-auto md:mx-auto">
           <img src="/assets/acorns-dashboard.jpg" alt="Acorns of Wisdom dashboard, the recreation with new branding and architecture" class="block rounded-lg w-full md:max-h-[360px] md:w-auto md:mx-auto">
         </div>
-        <figcaption class="text-sm text-on-surface-variant italic mt-5 md:mt-6">Left: Vibez at FordLabs, the original. Right: Acorns of Wisdom. Same core mechanics, different surface and architecture.</figcaption>
+        <figcaption class="text-sm text-on-surface-variant italic mt-5 md:mt-6">Vibez at FordLabs (the original) and Acorns of Wisdom (the recreation). Same core mechanics, different surface and architecture.</figcaption>
       </figure>
 
       <p class="text-base md:text-lg leading-relaxed text-on-surface-variant mb-8">The session works in three steps.</p>
@@ -433,6 +433,7 @@
     function update() {
       raf = null;
       const scrollPos = window.scrollY + HEADER_HEIGHT;
+      const atDocBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 4);
       let activeIdx = -1;
 
       items.forEach((item, i) => {
@@ -444,6 +445,13 @@
         if (scrollPos < top) pct = 0;
         else if (scrollPos >= bottom) pct = 100;
         else pct = ((scrollPos - top) / (bottom - top)) * 100;
+
+        // Snap the last section to 100% once user reaches the bottom of the document.
+        // Its activation line sits above the CTA + footer that follow it, so without
+        // this the indicator never completes even when there's nothing left to read.
+        if (i === items.length - 1 && atDocBottom && scrollPos >= top) {
+          pct = 100;
+        }
 
         item.fillEl.style.width = pct.toFixed(2) + '%';
 

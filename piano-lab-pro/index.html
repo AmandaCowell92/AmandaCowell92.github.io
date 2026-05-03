@@ -336,7 +336,7 @@
             </div>
           </aside>
         </div>
-        <figcaption class="text-sm text-on-surface-variant italic mt-3">Left: where students said those anxieties actually lived. Right: themes from interview synthesis.</figcaption>
+        <figcaption class="text-sm text-on-surface-variant italic mt-3">Two synthesis artifacts: where students said those anxieties actually lived, and the themes that emerged from interview synthesis.</figcaption>
       </figure>
 
       <div class="text-base md:text-lg leading-relaxed text-on-surface-variant space-y-5 mb-8">
@@ -502,6 +502,7 @@
     function update() {
       raf = null;
       const scrollPos = window.scrollY + HEADER_HEIGHT;
+      const atDocBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 4);
       let activeIdx = -1;
 
       items.forEach((item, i) => {
@@ -513,6 +514,13 @@
         if (scrollPos < top) pct = 0;
         else if (scrollPos >= bottom) pct = 100;
         else pct = ((scrollPos - top) / (bottom - top)) * 100;
+
+        // Snap the last section to 100% once user reaches the bottom of the document.
+        // Its activation line sits above the CTA + footer that follow it, so without
+        // this the indicator never completes even when there's nothing left to read.
+        if (i === items.length - 1 && atDocBottom && scrollPos >= top) {
+          pct = 100;
+        }
 
         item.fillEl.style.width = pct.toFixed(2) + '%';
 
