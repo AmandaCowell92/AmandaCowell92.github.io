@@ -65,6 +65,7 @@
     }
   </script>
   <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 128px; }
     body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     @media (max-width: 767px) {
@@ -81,9 +82,6 @@
         gap: 1rem;
         border-bottom: 1px solid rgba(197,191,186,0.4);
       }
-      .nav-menu.is-open > span { display: none; }
-      .nav-menu.is-open > a.ml-5,
-      .nav-menu.is-open > a.ml-3 { margin-left: 0 !important; }
     }
 
     /* Skip to main content link */
@@ -103,13 +101,57 @@
       outline-offset: 2px;
       border-radius: 4px;
     }
+
+    /* Section progress nav */
+    .section-nav-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 6px 2px 4px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .section-nav-track {
+      display: block;
+      height: 4px;
+      background: rgba(122, 116, 112, 0.25);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .section-nav-fill {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: #26585d;
+      border-radius: 9999px;
+      transition: width 120ms linear;
+    }
+    .section-nav-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #4A4440;
+      transition: color 150ms, font-weight 150ms;
+      text-align: left;
+    }
+    .section-nav-item:hover .section-nav-label {
+      color: #26585d;
+    }
+    .section-nav-item.is-active .section-nav-label {
+      color: #1C1714;
+      font-weight: 700;
+    }
+    @media (max-width: 380px) {
+      .section-nav-label { display: none; }
+    }
   </style>
 </head>
 <body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Nav -->
+  <!-- Site nav -->
   <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/40">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="/" class="flex items-center gap-3">
@@ -125,367 +167,220 @@
     </div>
   </nav>
 
-  <main id="main-content" class="pt-24 pb-20">
-
-    <!-- Hero -->
-    <header class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-8">
-          <h1 class="font-headline text-6xl md:text-8xl font-semibold text-primary tracking-tighter leading-none mb-8">
-            ChalkboardAI
-          </h1>
-          <p class="text-xl md:text-2xl text-on-surface-variant font-light max-w-2xl leading-relaxed">
-            A self-hosted AI math tutor that actually knows what your instructor taught. Running entirely offline on a Mac Studio for FERPA and FOIA compliance. Self-directed, in development.
-          </p>
-        </div>
-        <div class="lg:col-span-4 flex flex-col gap-4">
-          <div class="p-6 bg-surface-container-low rounded-xl">
-            <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Role</span>
-            <p class="font-medium text-on-surface">Product, design, engineering</p>
-          </div>
-          <div class="p-6 bg-surface-container-low rounded-xl">
-            <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Timeline</span>
-            <p class="font-medium text-on-surface">5-day build, 2026. Actively iterating.</p>
-          </div>
-          <div class="p-6 bg-surface-container-low rounded-xl">
-            <span class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">Stack</span>
-            <p class="text-xs text-on-surface-variant mb-3 italic">Running on my personal Mac Studio as a proof of concept.</p>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">React</span>
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">TypeScript</span>
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Ollama</span>
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">gemma3:27b</span>
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Fabric.js</span>
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">IndexedDB</span>
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Whisper.cpp</span>
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono">Kokoro TTS</span>
-              <span class="text-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-mono italic">Built with Claude Code</span>
-            </div>
-          </div>
-        </div>
+  <!-- Section progress nav -->
+  <nav id="section-nav" aria-label="Page sections" class="fixed left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-b border-outline-variant/40" style="top: 73px;">
+    <div class="max-w-7xl mx-auto px-6 py-2">
+      <div class="grid grid-cols-5 gap-1.5 md:gap-2">
+        <a href="#context" data-section="context" class="section-nav-item">
+          <span class="section-nav-track"><span class="section-nav-fill"></span></span>
+          <span class="section-nav-label">Context</span>
+        </a>
+        <a href="#problem" data-section="problem" class="section-nav-item">
+          <span class="section-nav-track"><span class="section-nav-fill"></span></span>
+          <span class="section-nav-label">Problem</span>
+        </a>
+        <a href="#approach" data-section="approach" class="section-nav-item">
+          <span class="section-nav-track"><span class="section-nav-fill"></span></span>
+          <span class="section-nav-label">Approach</span>
+        </a>
+        <a href="#decisions" data-section="decisions" class="section-nav-item">
+          <span class="section-nav-track"><span class="section-nav-fill"></span></span>
+          <span class="section-nav-label">Decisions</span>
+        </a>
+        <a href="#outcome" data-section="outcome" class="section-nav-item">
+          <span class="section-nav-track"><span class="section-nav-fill"></span></span>
+          <span class="section-nav-label">Outcome</span>
+        </a>
       </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pb-20" style="padding-top: 132px;">
+
+    <!-- Section 1: Context — wraps the hero so progress-nav scroll tracking starts at the page title -->
+    <section id="context" aria-labelledby="context-heading" class="mb-20">
+      <h2 id="context-heading" class="sr-only">Context</h2>
+
+      <!-- Hero -->
+      <header class="max-w-5xl mx-auto px-6 pt-8 md:pt-10 pb-8 md:pb-10">
+        <!-- TODO (Amanda): no chalkboardai-icon.png in /assets/. Add the icon-flex pattern from PLP if/when one lands. -->
+        <h1 class="font-headline text-5xl md:text-7xl font-semibold text-primary tracking-tighter leading-none mb-5">ChalkboardAI</h1>
+        <p class="text-xl md:text-2xl font-light text-on-surface-variant leading-relaxed mb-7">
+          A self-hosted AI math tutor that knows what your instructor actually taught. Running entirely offline on a Mac Studio for FERPA and FOIA compliance. Self-directed, in development.
+        </p>
+
+        <!-- Metadata strip (3 cells side by side) -->
+        <dl class="grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-4 pt-5 border-t border-outline-variant/40">
+          <div>
+            <dt class="text-[11px] font-bold text-secondary uppercase tracking-[0.14em] mb-1.5">Role</dt>
+            <dd class="text-sm md:text-base text-on-surface">Product, design, engineering</dd>
+          </div>
+          <div>
+            <dt class="text-[11px] font-bold text-secondary uppercase tracking-[0.14em] mb-1.5">Timeline</dt>
+            <dd class="text-sm md:text-base text-on-surface">5-day build, 2026, actively iterating</dd>
+          </div>
+          <div>
+            <dt class="text-[11px] font-bold text-secondary uppercase tracking-[0.14em] mb-1.5">Stack</dt>
+            <dd class="text-sm md:text-base text-on-surface">React, TypeScript, Ollama, gemma3:27b, Fabric.js, IndexedDB, Whisper.cpp, Kokoro TTS, built with Claude Code</dd>
+          </div>
+        </dl>
+      </header>
+
       <!-- Hero image -->
-      <div class="mt-16 rounded-xl overflow-hidden aspect-[1106/710] shadow-2xl">
-        <img class="w-full h-full object-contain" src="/assets/chalkboardai-hero.gif" alt="ChalkboardAI interface showing the infinite canvas with a math problem and AI tutor chat panel">
+      <div class="max-w-5xl mx-auto px-6 mb-16 md:mb-20">
+        <figure class="md:flex md:flex-col md:items-center">
+          <img src="/assets/chalkboardai-hero.gif" alt="ChalkboardAI interface showing the infinite canvas with a math problem and AI tutor chat panel" class="block rounded-xl w-full md:w-auto md:max-h-[460px] shadow-2xl">
+        </figure>
       </div>
-      <!-- Three signal cards -->
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-6 bg-surface-container-low rounded-xl border-l-4 border-primary">
-          <h3 class="font-bold text-on-surface mb-1">Shipped a working v1 in five days</h3>
-          <p class="text-sm text-on-surface-variant">Designed, architected, and built the complete student-facing experience against mock curriculum. Local inference, local RAG, voice I/O, infinite canvas, streaming chat with citations. Actively iterating.</p>
-        </div>
-        <div class="p-6 bg-surface-container-low rounded-xl border-l-4 border-secondary">
-          <h3 class="font-bold text-on-surface mb-1">Chose architecture against the default</h3>
-          <p class="text-sm text-on-surface-variant">Rejected cloud-dependent AI in favor of a local-first stack because FERPA and FOIA make privacy non-negotiable in education.</p>
-        </div>
-        <div class="p-6 bg-surface-container-low rounded-xl border-l-4 border-tertiary">
-          <h3 class="font-bold text-on-surface mb-1">Named what five days cannot validate</h3>
-          <p class="text-sm text-on-surface-variant">Real-user testing, instructor tooling, and institutional sign-offs are all documented as pending. The honest limitations are part of the case study.</p>
-        </div>
-      </div>
-    </header>
 
-    <!-- Why I built this -->
-    <section class="max-w-7xl mx-auto px-6 mb-24">
-      <div class="max-w-3xl">
-        <h2 class="font-headline text-4xl font-semibold text-primary mb-6 tracking-tight">Why I built this</h2>
-        <div class="space-y-5 text-lg leading-relaxed text-on-surface-variant">
-          <p>I've taught statistics and calculus to 500+ students at Washtenaw Community College over the years. AI tutors are already in my students' hands, and the ones they're using don't know what happened in our classroom. They fill gaps I didn't leave, and they miss the ones I did.</p>
-          <p>I wanted to prototype the version that starts from the lecture itself. Five days was the constraint: enough to test the architectural thesis end-to-end, not enough to validate it with real users. Building solo was the point. I wanted to understand the full stack of decisions involved when no one else is making them. Work continues.</p>
-        </div>
+      <!-- Context body prose -->
+      <div class="max-w-5xl mx-auto px-6 text-base md:text-lg leading-relaxed text-on-surface-variant space-y-5">
+        <p>I've taught statistics and calculus to 500+ students at Washtenaw Community College over the years. AI tutors are already in my students' hands, and the ones they're using don't know what happened in our classroom. They fill gaps I didn't leave, and they miss the ones I did.</p>
+        <p>I wanted to prototype the version that starts from the lecture itself. I gave myself five days to test the architectural thesis end-to-end and built it solo to understand the full stack of decisions involved when no one else is making them. Work continues.</p>
       </div>
     </section>
 
-    <!-- The Problem -->
-    <section class="bg-surface-container-low py-24 mb-24">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-          <div>
-            <h2 class="font-headline text-4xl font-semibold text-primary mb-8 tracking-tight">The problem</h2>
-            <div class="space-y-5 text-lg leading-relaxed text-on-surface-variant">
-              <p>Generic AI tutors don't know how your instructor actually taught a topic. Notation, approach, example sequence, and vocabulary all vary between instructors, and those variations matter when students are trying to reinforce what they just learned.</p>
-              <p>ChalkboardAI bridges this gap. An instructor uses it as a live lecture board. After class, it becomes each student's personal AI-assisted study tool, grounded in the specific lecture the student's instructor actually taught, with citations back to the source material.</p>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 gap-4 mt-8 md:mt-12">
-            <div class="bg-surface-container-highest rounded-xl p-8">
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">Generic AI tutor</p>
-              <p class="text-on-surface-variant leading-relaxed text-sm">No instructor context. No lecture grounding. Answers from a model that has never seen your class, your notation, or your examples.</p>
-            </div>
-            <div class="bg-primary rounded-xl p-8">
-              <p class="text-xs font-bold text-on-primary/70 uppercase tracking-widest mb-3">ChalkboardAI</p>
-              <p class="text-on-primary leading-relaxed text-sm">Grounded in the lecture the student's instructor actually taught, with citations back to the source material.</p>
-            </div>
-          </div>
-        </div>
+    <!-- Section 2: Problem -->
+    <section id="problem" aria-labelledby="problem-heading" class="max-w-5xl mx-auto px-6 mb-20">
+      <h2 id="problem-heading" class="font-headline text-3xl md:text-4xl font-semibold text-primary tracking-tight mb-8">Problem</h2>
+
+      <!-- Overarching problem callout -->
+      <aside class="bg-surface-container-low rounded-xl border-l-4 border-primary p-8 md:p-10 mb-10">
+        <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-4">Overarching problem</p>
+        <p class="font-headline text-2xl md:text-3xl font-semibold text-on-surface leading-snug">
+          When students turn to tutors or AI for help, they lose mental bandwidth navigating mismatches in notation, terminology, and approach, leaving less capacity for the conceptual work that actually builds understanding.
+        </p>
+      </aside>
+
+      <div class="text-base md:text-lg leading-relaxed text-on-surface-variant space-y-5">
+        <p>Generic AI tutors don't see the lecture, so they can't reinforce the specific notation, approach, example sequence, and vocabulary the instructor used. They can also do real harm: by default, they'll cheerfully give a student the answer instead of helping the student arrive at it, undercutting the practice that learning math actually requires.</p>
+        <p>The product has to do two things at once. It has to ground every response in the specific lecture the student's instructor taught, with citations back to the source material. And it has to behave as a tutor (asking, prompting, scaffolding) rather than as an answer machine.</p>
       </div>
     </section>
 
-    <!-- Why Local-First -->
-    <section class="max-w-7xl mx-auto px-6 mb-24">
-      <div class="mb-12">
-        <h2 class="font-headline text-4xl font-semibold text-primary mb-4 tracking-tight">Why local-first</h2>
-        <p class="text-on-surface-variant max-w-xl text-lg">Privacy isn't a feature in education. It's the foundation.</p>
+    <!-- Section 3: Approach -->
+    <section id="approach" aria-labelledby="approach-heading" class="max-w-5xl mx-auto px-6 mb-20">
+      <h2 id="approach-heading" class="font-headline text-3xl md:text-4xl font-semibold text-primary tracking-tight mb-8">Approach</h2>
+
+      <div class="text-base md:text-lg leading-relaxed text-on-surface-variant space-y-5 mb-10">
+        <p><strong class="text-on-surface font-semibold">Local-first, by necessity.</strong> Every part of the AI stack runs on a single Mac Studio: inference (Ollama with <code class="font-mono text-sm bg-surface-container px-1.5 py-0.5 rounded">gemma3:27b</code>), transcription (Whisper.cpp), embeddings (<code class="font-mono text-sm bg-surface-container px-1.5 py-0.5 rounded">nomic-embed-text</code>), and text-to-speech (Kokoro). Student interactions with AI tutors are educational records under FERPA, and transcript logging matters under FOIA. On-premise is the right architecture for real institutional deployment, and it zeroes out per-student API cost in the process.</p>
+        <p><strong class="text-on-surface font-semibold">What got built.</strong> Student-facing v1, end-to-end against a synthetic curriculum. An infinite spatial canvas (pen, eraser, shapes, image paste, math-aware undo, light/dark pen pairing) where students work the problem. A vision-capable local model that reads the board each turn and answers in context, with citation badges that link back to the specific lecture each response is grounded in. Chat sessions scoped per course and lecture, with rolling summarization so long sessions don't lose earlier work. Whisper.cpp for voice input from the browser, Kokoro TTS for spoken responses, and math read aloud through the same accessibility pipeline MathJax uses for screen readers.</p>
+        <p>The design foundation was built in Claude Design: color tokens, type scale, and component variants across light and dark modes, treated as a documented artifact rather than ad-hoc styles.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="md:col-span-2 bg-surface-container-low p-10 rounded-xl">
-          <h3 class="font-headline text-2xl font-semibold mb-4">FERPA &amp; FOIA compliance</h3>
-          <p class="text-on-surface-variant leading-relaxed text-lg">Every part of the AI stack runs locally on one Mac Studio. Inference via Ollama with <code class="text-sm bg-surface-container px-1.5 py-0.5 rounded font-mono">gemma3:27b</code>. Transcription via Whisper. Embeddings via <code class="text-sm bg-surface-container px-1.5 py-0.5 rounded font-mono">nomic-embed-text</code>. Text-to-speech via Kokoro. Student interactions with AI tutors are educational records under FERPA, and transcript logging and retrievability matter under FOIA. On-premise is the right architecture for real institutional deployment.</p>
+
+      <figure class="mb-10 bg-surface-container-low rounded-xl p-6 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-start">
+          <img src="/assets/chalkboardai-claude-design-system.png" alt="ChalkboardAI design system light mode, built with Claude Design" class="block rounded-lg w-full md:max-h-[360px] md:w-auto md:mx-auto">
+          <img src="/assets/chalkboardai-design-system-dark.png" alt="ChalkboardAI design system dark mode" class="block rounded-lg w-full md:max-h-[360px] md:w-auto md:mx-auto">
         </div>
-        <div class="bg-surface-container-low p-10 rounded-xl flex flex-col justify-center">
-          <h3 class="font-headline text-3xl font-bold text-primary mb-3">$0 per-student cost</h3>
-          <p class="text-on-surface-variant leading-relaxed">Local inference zeroes out per-student API cost, which is what makes institutional deployment actually viable at scale.</p>
-        </div>
-        <div class="bg-surface-container-low p-10 rounded-xl">
-          <h3 class="font-headline text-xl font-semibold mb-2">Local RAG</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed">Vector embeddings run on the client. The AI grounds responses in the student's curriculum without leaking interaction history to any cloud service.</p>
-        </div>
-      </div>
+        <figcaption class="text-sm text-on-surface-variant italic mt-5 md:mt-6">Built in Claude Design: tokens, type, and component variants across light and dark modes.</figcaption>
+      </figure>
     </section>
 
-    <!-- What's Shipped -->
-    <section class="max-w-7xl mx-auto px-6 mb-24">
-      <h2 class="font-headline text-4xl font-semibold text-primary mb-2 tracking-tight">What's shipped.</h2>
-      <p class="text-on-surface-variant text-xl mb-6 italic">Student-facing v1. End-to-end, running against a synthetic curriculum. Actively iterating.</p>
+    <!-- Section 4: Decisions -->
+    <section id="decisions" aria-labelledby="decisions-heading" class="max-w-5xl mx-auto px-6 mb-20">
+      <h2 id="decisions-heading" class="font-headline text-3xl md:text-4xl font-semibold text-primary tracking-tight mb-8">Decisions</h2>
 
-      <div class="space-y-24 mt-12">
-        <!-- Features grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-surface-container-low rounded-xl p-8">
-            <h3 class="font-headline text-xl font-semibold mb-4">Infinite spatial canvas</h3>
-            <p class="text-on-surface-variant leading-relaxed">Pen, eraser, shapes, text, laser tool, image paste, pan and pinch-zoom, undo/redo that covers math objects, and a pinned pen library with auto light/dark color pairing. Students work spatially, not linearly.</p>
-          </div>
-          <div class="bg-surface-container-low rounded-xl p-8">
-            <h3 class="font-headline text-xl font-semibold mb-4">Contextual grounding</h3>
-            <p class="text-on-surface-variant leading-relaxed">A vision-capable local model reads the student's board each turn and answers in context. Every response carries a citation badge back to the specific lecture it's grounded in, pulled from a local vector store with active-lecture retrieval boosting. Chat sessions are scoped per course and lecture, with rolling summarization so long sessions don't lose earlier work.</p>
-          </div>
-          <div class="bg-surface-container-low rounded-xl p-8">
-            <h3 class="font-headline text-xl font-semibold mb-4">Local voice I/O</h3>
-            <p class="text-on-surface-variant leading-relaxed">Whisper.cpp for transcription from the browser, Kokoro TTS for spoken responses. Math is spoken via the same accessibility pipeline MathJax uses for screen readers (Speech Rule Engine with ClearSpeak). Accuracy disclaimer permanently visible; one-time-per-session acknowledgment modal before any AI interaction.</p>
-          </div>
-        </div>
+      <p class="text-base md:text-lg leading-relaxed text-on-surface-variant mb-12">Four calls I made during the build that say more about how I think than a resume bullet would. Each is documented in a commit or a persistent decision file from the time it was made.</p>
 
-        <!-- Design system -->
-        <div class="flex flex-col md:flex-row-reverse gap-16 items-center">
-          <div class="w-full md:w-1/2 grid grid-cols-2 gap-3">
-            <div class="p-2 bg-surface-container-high rounded-xl shadow-sm">
-              <img class="rounded-xl w-full" src="/assets/chalkboardai-claude-design-system.png" alt="ChalkboardAI design system light mode, built with Claude Design">
-            </div>
-            <div class="p-2 bg-surface-container-high rounded-xl shadow-sm">
-              <img class="rounded-xl w-full" src="/assets/chalkboardai-design-system-dark.png" alt="ChalkboardAI design system dark mode">
-            </div>
-          </div>
-          <div class="w-full md:w-1/2">
-            <h3 class="font-headline text-3xl font-semibold mb-6">Tokens, type, and modes built with Claude Design</h3>
-            <p class="text-lg text-on-surface-variant leading-relaxed">The design foundation was built using Claude Design, Anthropic's design tool: color tokens, type scale, and component variants across light and dark modes. Treating the design system as a documented artifact rather than ad-hoc styles meant every new screen started from a consistent base.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+      <div class="space-y-6 md:space-y-8">
 
-    <!-- Product Decisions -->
-    <section class="max-w-7xl mx-auto px-6 py-24 mb-24">
-      <div class="mb-16">
-        <h2 class="font-headline text-4xl font-semibold text-primary mb-4 tracking-tight">Decisions and their costs.</h2>
-        <p class="text-on-surface-variant max-w-2xl text-lg italic">Four calls I made during the build that say more about how I think than a resume bullet would. Each is documented in a commit or a persistent decision file from the time it was made.</p>
-      </div>
-      <div class="space-y-6">
+        <!-- Decision 01 -->
+        <article class="bg-surface-container-low rounded-xl p-6 md:p-10">
+          <div class="flex items-start gap-5 md:gap-7 mb-6">
+            <p class="font-headline text-5xl md:text-6xl font-semibold text-primary leading-none flex-shrink-0">01</p>
+            <h3 class="font-headline text-xl md:text-2xl font-semibold text-on-surface leading-tight pt-1.5 md:pt-2">Routing math computation through a verified solver</h3>
+          </div>
+          <div class="text-base md:text-lg leading-relaxed text-on-surface-variant space-y-5 mb-6">
+            <p>The base LLM could not be trusted to do arithmetic. On the same problem (the limit of f(x) = 12 &minus; 5x as x approaches 2, answer: 2), it returned 7, then 3, then &minus;8 in a single session. A math tutor that gets the math wrong is worse than no tutor at all.</p>
+            <p>Better prompting wouldn't fix it; the model was just computing badly. I connected the model to a math solver for computation, so the LLM handles reasoning and explanation while verified tool calls handle the arithmetic. The model went from three wrong answers on one problem to consistent accuracy on the same class of questions.</p>
+          </div>
 
-        <!-- 01 -->
-        <div class="bg-surface-container-low rounded-xl p-8 md:p-10">
-          <div class="flex items-baseline gap-4 mb-6">
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest flex-shrink-0">01</span>
-            <h3 class="font-headline text-xl font-semibold text-on-surface">Socratic enforcement: accept leakage, fix the UX instead</h3>
+          <!-- Mid-decision evidence images -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 items-start">
+            <img src="/assets/chalkboardai-llm-before-2.jpg" alt="Early LLM chat: model confidently gives wrong answer of 7 for a limit, then recalculates to 3" class="block rounded-lg w-full md:max-h-[320px] md:w-auto md:mx-auto">
+            <img src="/assets/chalkboardai-proto-v1.gif" alt="First working session: ChalkboardAI canvas with the math solver connected" class="block rounded-lg w-full md:max-h-[320px] md:w-auto md:mx-auto">
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">The problem</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">The model occasionally leaks worked answers in the chat body even with strict system prompting.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I rejected</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">A two-stage critic model (added latency) and blunt regex filtering (too many false positives on legitimate recall queries).</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I landed on</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">Accept occasional leakage, but hide AI-generated artifact tags during streaming so the flash-and-vanish is less jarring. No "hide answers" toggle. The complexity wasn't worth the marginal benefit.</p>
-            </div>
-          </div>
-        </div>
 
-        <!-- 02 -->
-        <div class="bg-surface-container-low rounded-xl p-8 md:p-10">
-          <div class="flex items-baseline gap-4 mb-6">
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest flex-shrink-0">02</span>
-            <h3 class="font-headline text-xl font-semibold text-on-surface">Inline chat artifacts over a duplicated help zone</h3>
-          </div>
-          <div class="mb-6">
-            <img class="rounded-xl w-full" src="/assets/chalkboardai-figma-restructure.png" alt="Figma wireframe showing the earlier layout with a separate AI help canvas on the left sidebar">
-            <p class="text-xs text-on-surface-variant italic mt-2">The earlier layout: AI-generated items appear in a separate left panel alongside the chat.</p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">The problem</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">An early version had a top-of-sidebar "help canvas" where AI-generated math items appeared.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">The observation</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">It duplicated the chat. Users would have to track where a generated item lived in two places.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I landed on</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">Removed the help zone. AI-generated items now render inline under the chat bubble that produced them, still draggable onto the main board. One place for everything worked better than two.</p>
-            </div>
-          </div>
-        </div>
+          <p class="text-base md:text-lg leading-relaxed text-on-surface-variant"><strong class="text-on-surface font-semibold">What I learned.</strong> When the failure is at the model's core capability, prompting harder is the wrong move. Tool use is the right one.</p>
+        </article>
 
-        <!-- 03 -->
-        <div class="bg-surface-container-low rounded-xl p-8 md:p-10">
-          <div class="flex items-baseline gap-4 mb-6">
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest flex-shrink-0">03</span>
-            <h3 class="font-headline text-xl font-semibold text-on-surface">Rolling summary over sliding window for context management</h3>
+        <!-- Decision 02 -->
+        <article class="bg-surface-container-low rounded-xl p-6 md:p-10">
+          <div class="flex items-start gap-5 md:gap-7 mb-6">
+            <p class="font-headline text-5xl md:text-6xl font-semibold text-primary leading-none flex-shrink-0">02</p>
+            <h3 class="font-headline text-xl md:text-2xl font-semibold text-on-surface leading-tight pt-1.5 md:pt-2">Rolling summary over sliding window for context management</h3>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">The problem</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">The model started slowing down and drifting on format rules mid-session.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I rejected</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">A sliding context window. That would have broken "the AI remembers what we worked on twenty minutes ago," which is first-class important for the product.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I landed on</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">Rolling summarization. Preserves continuity at the cost of a second model call.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What this taught me</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">Designing for context pressure from the start would have avoided the triggering degradation. On the next build, context management is a day-one concern.</p>
-            </div>
+          <div class="text-base md:text-lg leading-relaxed text-on-surface-variant space-y-5">
+            <p>Mid-session, the model started slowing down and drifting on format rules. The obvious fix was a sliding context window. The obvious fix was wrong: it would have broken "the AI remembers what we worked on twenty minutes ago," which is first-class important for a tutor.</p>
+            <p>I implemented rolling summarization instead. Preserves continuity at the cost of a second model call.</p>
+            <p><strong class="text-on-surface font-semibold">What I learned.</strong> Designing for context pressure from the start would have avoided the degradation. Context management is a day-one concern on the next build, not a thing to address when it breaks.</p>
           </div>
-        </div>
+        </article>
 
-        <!-- 04 -->
-        <div class="bg-surface-container-low rounded-xl p-8 md:p-10">
-          <div class="flex items-baseline gap-4 mb-6">
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest flex-shrink-0">04</span>
-            <h3 class="font-headline text-xl font-semibold text-on-surface">Accessibility-first as a tiebreaker default</h3>
+        <!-- Decision 03 -->
+        <article class="bg-surface-container-low rounded-xl p-6 md:p-10">
+          <div class="flex items-start gap-5 md:gap-7 mb-6">
+            <p class="font-headline text-5xl md:text-6xl font-semibold text-primary leading-none flex-shrink-0">03</p>
+            <h3 class="font-headline text-xl md:text-2xl font-semibold text-on-surface leading-tight pt-1.5 md:pt-2">Inline chat artifacts over a duplicated help zone</h3>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">The problem</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">A working bespoke regex pipeline for speaking math notation aloud. It worked, but required case-by-case authoring for each notation type.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I found</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">The Speech Rule Engine, the standards-based pipeline MathJax uses for screen readers, covered a much broader set of notation correctly out of the box.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">The trade</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">About 300KB of bundle size for correct, broad coverage without hand-authoring.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I landed on</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">Delete the bespoke pipeline. When an accessibility-aware library exists and works, it wins by default.</p>
-            </div>
+          <div class="text-base md:text-lg leading-relaxed text-on-surface-variant space-y-5 mb-6">
+            <p>An early version had a top-of-sidebar "help canvas" where AI-generated math items appeared. Watching it work, the duplication was the problem: users had to track where a generated item lived in two places, the chat <em>and</em> the help canvas.</p>
+            <p>I removed the help zone. AI-generated items now render inline under the chat bubble that produced them, still draggable onto the main board.</p>
           </div>
-        </div>
 
-        <!-- 05 -->
-        <div class="bg-surface-container-low rounded-xl p-8 md:p-10">
-          <div class="flex items-baseline gap-4 mb-6">
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest flex-shrink-0">05</span>
-            <h3 class="font-headline text-xl font-semibold text-on-surface">Routing math computation through a verified solver</h3>
+          <!-- Mid-decision evidence image -->
+          <figure class="mb-6 md:flex md:flex-col md:items-center">
+            <img src="/assets/chalkboardai-figma-restructure.png" alt="Figma wireframe showing the earlier layout with a separate AI help canvas on the left sidebar" class="block rounded-lg w-full md:w-auto md:max-h-[320px]">
+          </figure>
+
+          <p class="text-base md:text-lg leading-relaxed text-on-surface-variant"><strong class="text-on-surface font-semibold">What I learned.</strong> When in doubt, fewer surfaces.</p>
+        </article>
+
+        <!-- Decision 04 -->
+        <article class="bg-surface-container-low rounded-xl p-6 md:p-10">
+          <div class="flex items-start gap-5 md:gap-7 mb-6">
+            <p class="font-headline text-5xl md:text-6xl font-semibold text-primary leading-none flex-shrink-0">04</p>
+            <h3 class="font-headline text-xl md:text-2xl font-semibold text-on-surface leading-tight pt-1.5 md:pt-2">Accessibility-first as a tiebreaker default</h3>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
-            <img class="rounded-xl w-full h-full object-cover" src="/assets/chalkboardai-llm-before-2.jpg" alt="Early LLM chat: model confidently gives wrong answer of 7 for a limit, then recalculates to 3">
-            <img class="rounded-xl w-full h-full object-cover" src="/assets/chalkboardai-llm-before-1.jpg" alt="Early LLM chat: model revises again to -8, student asks why it got it wrong, model apologizes">
-            <img class="rounded-xl w-full h-full object-cover" src="/assets/chalkboardai-proto-v1.gif" alt="First working session: ChalkboardAI canvas with the math solver connected">
+          <div class="text-base md:text-lg leading-relaxed text-on-surface-variant space-y-5">
+            <p>I'd written a working bespoke regex pipeline for speaking math notation aloud. It worked, but each notation type required case-by-case authoring. When I checked whether a standard existed, the Speech Rule Engine (the standards-based pipeline MathJax uses for screen readers) covered a much broader set of notation correctly out of the box. The trade was about 300KB of bundle size.</p>
+            <p>I deleted the bespoke pipeline.</p>
+            <p><strong class="text-on-surface font-semibold">What I learned.</strong> When an accessibility-aware library exists and works, it wins by default. The bundle-size cost is almost always smaller than the cost of maintaining a hand-authored equivalent.</p>
           </div>
-          <p class="text-xs text-on-surface-variant italic mb-6">Three different wrong answers in one session (correct answer: 2), and the first working session after connecting the solver.</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">The problem</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">The base LLM could not be trusted to do arithmetic. On the same problem (find the limit of f(x) = 12 - 5x as x approaches 2, answer: 2) it returned 7, then 3, then -8 in a single session. A math tutor that gets the math wrong is worse than no tutor at all.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I rejected</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">Relying on better prompting alone. The model was just computing badly, and better prompting couldn't fix that.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">What I landed on</p>
-              <p class="text-on-surface-variant text-sm leading-relaxed">Connected the model to a math solver for computation, so the LLM handles reasoning and explanation while verified tool calls handle the arithmetic. The model went from three wrong answers on one problem to consistent accuracy on the same class of questions.</p>
-            </div>
-          </div>
-        </div>
+        </article>
 
       </div>
     </section>
 
-    <!-- What building it taught me -->
-    <section class="max-w-7xl mx-auto px-6 mb-24">
-      <div class="max-w-3xl">
-        <h2 class="font-headline text-4xl font-semibold text-primary mb-12 tracking-tight">What building it taught me</h2>
-        <p class="text-on-surface-variant text-lg mb-10">Four things I learned that a spec couldn't have surfaced:</p>
-        <div class="space-y-10 border-l-2 border-surface-container-high pl-10">
-          <div>
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest mb-2 block">01</span>
-            <h3 class="font-headline text-xl font-semibold mb-3">Socratic enforcement is fundamentally hard to solve in prompting alone</h3>
-            <p class="text-on-surface-variant leading-relaxed">Specified the constraint, observed the violations, tried filtering, reverted, landed on "accept it and fix the UX." Only runtime behavior would have surfaced this path.</p>
-          </div>
-          <div>
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest mb-2 block">02</span>
-            <h3 class="font-headline text-xl font-semibold mb-3">Context growth degrades format adherence, not just speed</h3>
-            <p class="text-on-surface-variant leading-relaxed">The model didn't just slow down mid-session. It also started violating format rules. That observation informed the rolling-summary fix and aggressive trimming of the API payload.</p>
-          </div>
-          <div>
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest mb-2 block">03</span>
-            <h3 class="font-headline text-xl font-semibold mb-3">Bespoke regex pipelines win early, then lose</h3>
-            <p class="text-on-surface-variant leading-relaxed">Targeted rules for derivative notation and function application worked fine at first. When I asked whether a standard existed, the accessibility TTS standard covered a much broader set of notation correctly with no case-by-case authoring. Default to the accessibility-aware library when one exists.</p>
-          </div>
-          <div>
-            <span class="text-xs font-bold text-secondary uppercase tracking-widest mb-2 block">04</span>
-            <h3 class="font-headline text-xl font-semibold mb-3">Install-time failures don't show up in specs</h3>
-            <p class="text-on-surface-variant leading-relaxed">Browser-bundling a speech ruleset requires locale JSON served as static assets. New Python deps don't fit the default macOS Python. Both surfaced only at install time, which led to writing a postinstall hook and a <code class="text-sm bg-surface-container px-1.5 py-0.5 rounded font-mono">uv</code>-managed Python 3.12 path.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Section 5: Outcome -->
+    <section id="outcome" aria-labelledby="outcome-heading" class="max-w-5xl mx-auto px-6 mb-20">
+      <h2 id="outcome-heading" class="font-headline text-3xl md:text-4xl font-semibold text-primary tracking-tight mb-8">Outcome</h2>
 
-    <!-- What's not done yet -->
-    <section class="max-w-7xl mx-auto px-6 mb-24">
-      <div class="bg-surface-container-low p-10 md:p-16 rounded-xl">
-        <h2 class="font-headline text-4xl font-semibold text-primary mb-4 tracking-tight">What's not done yet</h2>
-        <p class="text-on-surface-variant mb-10 text-lg">Five days ships a working v1. Five days does not ship a validated product. Here's what's still unvalidated. Work is ongoing.</p>
-        <ul class="space-y-4 list-none">
-          <li class="flex items-start gap-3">
-            <span class="text-outline mt-1.5 flex-shrink-0 text-lg leading-none">&#8211;</span>
-            <p class="text-on-surface-variant leading-relaxed"><strong class="text-on-surface font-semibold">Real-user validation is zero.</strong> No students, tutors, or faculty have exercised it. Everything about response quality, retrieval thresholds, and tutor tone is based on self-testing, which I know isn't enough.</p>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-outline mt-1.5 flex-shrink-0 text-lg leading-none">&#8211;</span>
-            <p class="text-on-surface-variant leading-relaxed"><strong class="text-on-surface font-semibold">The corpus is synthetic.</strong> Mock transcripts are hand-written, not real Whisper output. They're cleaner and more retrieval-friendly than real lectures will be.</p>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-outline mt-1.5 flex-shrink-0 text-lg leading-none">&#8211;</span>
-            <p class="text-on-surface-variant leading-relaxed"><strong class="text-on-surface font-semibold">Instructor side is entirely unbuilt.</strong> The half of the product that generates the content students study against doesn't exist yet.</p>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-outline mt-1.5 flex-shrink-0 text-lg leading-none">&#8211;</span>
-            <p class="text-on-surface-variant leading-relaxed"><strong class="text-on-surface font-semibold">No auth, no accounts.</strong> Single-machine, single-user local storage. Switching students means clearing browser state.</p>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-outline mt-1.5 flex-shrink-0 text-lg leading-none">&#8211;</span>
-            <p class="text-on-surface-variant leading-relaxed"><strong class="text-on-surface font-semibold">Institutional sign-offs pending.</strong> Spec documents FOIA coordinator approval and academic-integrity approval as prerequisites before a real launch.</p>
-          </li>
-        </ul>
-      </div>
+      <p class="text-base md:text-lg leading-relaxed text-on-surface-variant mb-10">Student-facing v1 is working end-to-end against a synthetic curriculum. Actively iterating.</p>
+
+      <p class="text-base md:text-lg leading-relaxed text-on-surface-variant mb-6">Five days ships a working v1. Five days does not ship a validated product. Here's what's still unvalidated:</p>
+
+      <ul class="space-y-4 text-base md:text-lg leading-relaxed text-on-surface-variant">
+        <li class="flex gap-3">
+          <span class="text-outline font-bold flex-shrink-0 mt-0.5">&#9675;</span>
+          <span><strong class="text-on-surface font-semibold">Real-user validation is zero.</strong> No students, tutors, or faculty have exercised it. Everything about response quality, retrieval thresholds, and tutor tone is based on self-testing against a synthetic curriculum.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-outline font-bold flex-shrink-0 mt-0.5">&#9675;</span>
+          <span><strong class="text-on-surface font-semibold">Instructor side is entirely unbuilt.</strong> The half of the product that generates the content students study against doesn't exist yet.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-outline font-bold flex-shrink-0 mt-0.5">&#9675;</span>
+          <span><strong class="text-on-surface font-semibold">Institutional sign-offs pending.</strong> Spec documents FOIA coordinator approval and academic-integrity approval as prerequisites before a real launch.</span>
+        </li>
+      </ul>
     </section>
 
   </main>
 
   <!-- Footer -->
-  <footer class="bg-teal-900 w-full py-12">
+  <footer class="bg-teal-900 w-full py-12 mt-16">
     <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
       <a href="/work/" class="text-lg font-bold font-headline text-teal-50 hover:text-teal-200 transition-colors">&#8592; Work</a>
       <p class="text-teal-100/50 text-sm">Powered by coffee.</p>
@@ -497,6 +392,66 @@
     document.getElementById('nav-toggle').addEventListener('click', function() {
       document.getElementById('nav-menu').classList.toggle('is-open');
     });
+  </script>
+
+  <script id="section-progress-nav-script">
+  (function () {
+    // Reusable scroll-spy + progress nav. To reuse on another case study: copy this script
+    // + the matching <nav id="section-nav"> markup, and edit the SECTIONS array below.
+    // Each id must match a <section id="..."> on the page.
+    const SECTIONS = [
+      { id: 'context',   label: 'Context'   },
+      { id: 'problem',   label: 'Problem'   },
+      { id: 'approach',  label: 'Approach'  },
+      { id: 'decisions', label: 'Decisions' },
+      { id: 'outcome',   label: 'Outcome'   }
+    ];
+    const HEADER_HEIGHT = 128;
+
+    const items = SECTIONS.map(s => ({
+      id: s.id,
+      section: document.getElementById(s.id),
+      navEl: document.querySelector('[data-section="' + s.id + '"]'),
+      fillEl: document.querySelector('[data-section="' + s.id + '"] .section-nav-fill')
+    })).filter(x => x.section && x.navEl && x.fillEl);
+
+    let raf = null;
+
+    function update() {
+      raf = null;
+      const scrollPos = window.scrollY + HEADER_HEIGHT;
+      let activeIdx = -1;
+
+      items.forEach((item, i) => {
+        const top = item.section.offsetTop;
+        const next = i + 1 < items.length ? items[i + 1].section : null;
+        const bottom = next ? next.offsetTop : (item.section.offsetTop + item.section.offsetHeight);
+
+        let pct;
+        if (scrollPos < top) pct = 0;
+        else if (scrollPos >= bottom) pct = 100;
+        else pct = ((scrollPos - top) / (bottom - top)) * 100;
+
+        item.fillEl.style.width = pct.toFixed(2) + '%';
+
+        if (scrollPos >= top) activeIdx = i;
+      });
+
+      if (activeIdx === -1) activeIdx = 0;
+
+      items.forEach((item, i) => {
+        item.navEl.classList.toggle('is-active', i === activeIdx);
+      });
+    }
+
+    function schedule() {
+      if (raf == null) raf = requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    update();
+  })();
   </script>
 
 </body>
