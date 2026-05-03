@@ -109,9 +109,12 @@
   <!-- Nav -->
   <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/40">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="/" class="font-headline text-xl font-semibold text-primary tracking-tight">Amanda L. Cowell</a>
+      <a href="/" class="flex items-center gap-3">
+        <img src="/assets/logo.png" alt="" aria-hidden="true" class="h-10 w-10 object-contain">
+        <span class="font-headline text-xl font-semibold text-primary tracking-tight">Amanda L. Cowell</span>
+      </a>
       <div id="nav-menu" class="nav-menu hidden md:flex items-center gap-8">
-        <a href="/#projects" class="text-on-surface-variant hover:text-primary transition-colors text-sm">Work</a>
+        <a href="/work/" class="text-on-surface-variant hover:text-primary transition-colors text-sm">Work</a>
         <a href="/more/" class="text-on-surface-variant hover:text-primary transition-colors text-sm">More</a>
         <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="bg-primary text-on-primary px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">LinkedIn</a>
       </div>
@@ -130,116 +133,20 @@
         <div class="text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-2xl mb-10">
           <p>I'm a product manager with a math background. I lead XR and AI projects at the University of Michigan during the week, teach calculus and statistics at Washtenaw Community College on the side, and prototype tools of my own on the weekends.</p>
         </div>
-        <a href="/more/" class="inline-flex items-center gap-2 bg-primary text-on-primary px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
-          More about me
-        </a>
+        <div class="flex flex-col items-start gap-3">
+          <a href="/work/" class="inline-flex items-center gap-2 bg-primary text-on-primary px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
+            See selected work
+          </a>
+          <a href="/more/" class="inline-flex items-center gap-2 border-2 border-primary text-primary bg-transparent px-5 py-[calc(0.5rem-2px)] rounded-full text-sm font-medium hover:bg-primary hover:text-on-primary transition-colors">
+            More about me
+          </a>
+        </div>
       </div>
       <div class="lg:col-span-4">
         <div class="rounded-xl overflow-hidden aspect-[3/4]">
           <img src="/assets/headshot.jpg" alt="Amanda Cowell, product manager and math instructor" class="w-full h-full object-cover object-[50%_15%]">
         </div>
       </div>
-    </section>
-
-    <!-- About -->
-    <section class="bg-surface-container-low py-24">
-      <div class="max-w-3xl mx-auto px-6">
-        <h2 class="font-headline text-3xl font-semibold text-on-surface mb-8">Where I do my best work.</h2>
-        <div class="space-y-5 text-lg leading-relaxed text-on-surface-variant">
-          <p>Small teams trying to figure something out is where I do my best work. Most of what I touch lives at the intersection of emerging technology and learning, which means a lot of "we think this could matter, but nobody's sure yet." Getting those calls right takes digging in until both the technical shape and the human shape of the problem are clear.</p>
-          <p>Coming to product from mathematics turns out to be a real asset. Holding a technical conversation with engineers and translating it for non-technical clients gets sharpened by teaching calculus and statistics to 500+ students over the years. Prototyping my own tools with Claude Code keeps me honest about what's realistic to ask of a team.</p>
-        </div>
-        <p class="mt-8 text-sm text-on-surface-variant">The full timeline is on <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">LinkedIn</a>.</p>
-      </div>
-    </section>
-
-    <!-- Selected Work -->
-    <section id="projects" class="py-32">
-      <div class="max-w-7xl mx-auto px-6 mb-16">
-        <h2 class="font-headline text-4xl font-semibold text-on-surface">Selected Work</h2>
-        <p class="font-headline italic text-xl text-on-surface-variant mt-3">A few recent projects.</p>
-      </div>
-
-      <!-- ChalkboardAI (image left) -->
-      <div class="group border-t border-outline-variant/40">
-        <div class="flex flex-col lg:flex-row items-stretch">
-          <a href="/chalkboardai/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/chalkboardai-hero-still.jpg" alt="ChalkboardAI interface showing the infinite canvas with a math problem and AI tutor chat panel">
-          </a>
-          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
-            <div>
-              <h3 class="font-headline text-3xl font-semibold text-on-surface mb-4">ChalkboardAI</h3>
-              <p class="text-on-surface-variant leading-relaxed text-lg">Local-first AI math tutoring grounded in the specific lecture a student is studying. Entirely offline for FERPA and FOIA compliance, running on a Mac Studio. A self-directed prototype I built to figure out what's actually possible in institutional AI.</p>
-            </div>
-            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">React</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">TypeScript</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Ollama</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">local RAG</span>
-              <span class="text-outline mx-1">·</span>
-              <span class="text-secondary font-medium">Self-directed</span>
-              <span class="text-outline mx-0.5">·</span>
-              <span class="text-secondary font-medium">In development</span>
-            </div>
-            <a href="/chalkboardai/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
-              Read the case study <span aria-hidden="true">&#8594;</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Piano Lab Pro (image right) -->
-      <div class="group border-t border-outline-variant/40">
-        <div class="flex flex-col lg:flex-row-reverse items-stretch">
-          <a href="/piano-lab-pro/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/plp-hero-thumb.jpg" alt="Piano Lab Pro in mixed reality with a musician performing in a virtual concert hall">
-          </a>
-          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
-            <div>
-              <h3 class="font-headline text-3xl font-semibold text-on-surface mb-4">Piano Lab Pro</h3>
-              <p class="text-on-surface-variant leading-relaxed text-lg">Mixed reality performance preparation on Apple Vision Pro, built with a fifteen-person cross-functional team at U-M's Center for Academic Innovation and the School of Music, Theatre &amp; Dance. Two years from discovery to MVP.</p>
-            </div>
-            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Apple Vision Pro</span>
-              <span class="text-outline mx-1">·</span>
-              <span class="text-secondary font-medium">Product Manager</span>
-              <span class="text-outline mx-0.5">·</span>
-              <span class="text-secondary font-medium">MVP June 2026</span>
-            </div>
-            <a href="/piano-lab-pro/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
-              Read the case study <span aria-hidden="true">&#8594;</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Acorns of Wisdom (image left) -->
-      <div class="group border-t border-outline-variant/40 border-b border-outline-variant/40">
-        <div class="flex flex-col lg:flex-row items-stretch">
-          <a href="/acorns/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/acorns-hero.gif" alt="Acorns of Wisdom dashboard with team ratings and animated squirrel">
-          </a>
-          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
-            <div>
-              <h3 class="font-headline text-3xl font-semibold text-on-surface mb-4">Acorns of Wisdom</h3>
-              <p class="text-on-surface-variant leading-relaxed text-lg">A team health check web app I built for my own team in two weeks, deployed, and still in use. Anonymous ratings, passcode protection, drag-and-drop action items, and an animated squirrel.</p>
-            </div>
-            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">React</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Firebase</span>
-              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Vercel</span>
-              <span class="text-outline mx-1">·</span>
-              <span class="text-secondary font-medium">Self-directed</span>
-              <span class="text-outline mx-0.5">·</span>
-              <span class="text-secondary font-medium">Shipped</span>
-            </div>
-            <a href="/acorns/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
-              Read the case study <span aria-hidden="true">&#8594;</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
     </section>
 
   </main>

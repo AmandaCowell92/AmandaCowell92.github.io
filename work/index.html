@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work: Amanda L. Cowell</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-high": "#D8D3CB",
+            "primary-fixed": "#b9ebf2",
+            "on-surface": "#1C1714",
+            "on-secondary-fixed-variant": "#384b3c",
+            "outline-variant": "#C5BFBA",
+            "on-secondary-container": "#546757",
+            "surface-container-low": "#EDE9E2",
+            "on-secondary-fixed": "#0d1f12",
+            "primary": "#26585d",
+            "surface-container": "#E3DFD7",
+            "on-primary-container": "#c0f2f8",
+            "on-primary": "#ffffff",
+            "secondary": "#4f6353",
+            "primary-container": "#407076",
+            "surface": "#FAF7F2",
+            "primary-fixed-dim": "#9ecfd5",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#d2e8d3",
+            "surface-container-highest": "#CEC9C0",
+            "secondary-container": "#cfe5d0",
+            "on-primary-fixed": "#001f23",
+            "secondary-fixed-dim": "#b6ccb8",
+            "on-surface-variant": "#4A4440",
+            "tertiary": "#554d65",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#6d657e",
+            "on-primary-fixed-variant": "#1a4e53",
+            "inverse-primary": "#9ecfd5",
+            "surface-container-lowest": "#F4F1EC",
+            "outline": "#7A7470",
+            "surface-dim": "#D0CBC4",
+            "accent": "#B05C1A"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "headline": ["Fraunces", "Georgia", "serif"],
+            "body": ["Inter", "system-ui", "sans-serif"],
+            "label": ["Inter", "system-ui", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    @media (max-width: 767px) {
+      .nav-menu.is-open {
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #FAF7F2;
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(197,191,186,0.4);
+      }
+    }
+
+    /* Skip to main content link */
+    .skip-link {
+      position: absolute; top: -100px; left: 8px;
+      background: #26585d; color: #fff;
+      padding: 8px 16px; border-radius: 6px;
+      z-index: 100; text-decoration: none;
+      font-weight: 500; font-size: 14px;
+      transition: top 0.15s;
+    }
+    .skip-link:focus { top: 8px; }
+
+    /* Visible focus indicators */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #26585d;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Nav -->
+  <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/40">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/assets/logo.png" alt="" aria-hidden="true" class="h-10 w-10 object-contain">
+        <span class="font-headline text-xl font-semibold text-primary tracking-tight">Amanda L. Cowell</span>
+      </a>
+      <div id="nav-menu" class="nav-menu hidden md:flex items-center gap-8">
+        <a href="/work/" class="text-primary font-medium border-b-2 border-primary pb-0.5 text-sm">Work</a>
+        <a href="/more/" class="text-on-surface-variant hover:text-primary transition-colors text-sm">More</a>
+        <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="bg-primary text-on-primary px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">LinkedIn</a>
+      </div>
+      <button id="nav-toggle" type="button" aria-label="Toggle menu" class="md:hidden material-symbols-outlined text-primary cursor-pointer bg-transparent border-0 p-0">menu</button>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-20 pb-20">
+
+    <!-- Page header -->
+    <header class="max-w-7xl mx-auto px-6 pt-10 md:pt-16 pb-12 md:pb-16">
+      <h1 class="font-headline text-6xl md:text-8xl font-semibold text-primary tracking-tighter leading-none mb-5">
+        Work
+      </h1>
+      <p class="font-headline italic text-xl md:text-2xl text-on-surface-variant">
+        A few recent projects.
+      </p>
+    </header>
+
+    <!-- Selected Work -->
+    <section id="projects" class="space-y-16 md:space-y-20">
+
+      <!-- ChalkboardAI (image left) -->
+      <div class="group border-t border-outline-variant/40">
+        <div class="flex flex-col lg:flex-row items-stretch">
+          <a href="/chalkboardai/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/chalkboardai-hero-still.jpg" alt="ChalkboardAI interface showing the infinite canvas with a math problem and AI tutor chat panel">
+          </a>
+          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
+            <div>
+              <h2 class="font-headline text-3xl font-semibold text-on-surface mb-4">
+                <a href="/chalkboardai/" class="hover:text-primary transition-colors">ChalkboardAI</a>
+              </h2>
+              <p class="text-on-surface-variant leading-relaxed text-lg">Local-first AI math tutoring grounded in the specific lecture a student is studying. Entirely offline for FERPA and FOIA compliance, running on a Mac Studio. A self-directed prototype I built to figure out what's actually possible in institutional AI.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
+              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">React</span>
+              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">TypeScript</span>
+              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Ollama</span>
+              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">local RAG</span>
+              <span class="text-outline mx-1">·</span>
+              <span class="text-secondary font-medium">Self-directed</span>
+              <span class="text-outline mx-0.5">·</span>
+              <span class="text-secondary font-medium">In development</span>
+            </div>
+            <a href="/chalkboardai/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
+              Read the case study <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Piano Lab Pro (image right) -->
+      <div class="group border-t border-outline-variant/40">
+        <div class="flex flex-col lg:flex-row-reverse items-stretch">
+          <a href="/piano-lab-pro/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/plp-hero-thumb.jpg" alt="Piano Lab Pro in mixed reality with a musician performing in a virtual concert hall">
+          </a>
+          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
+            <div>
+              <h2 class="font-headline text-3xl font-semibold text-on-surface mb-4">
+                <a href="/piano-lab-pro/" class="hover:text-primary transition-colors">Piano Lab Pro</a>
+              </h2>
+              <p class="text-on-surface-variant leading-relaxed text-lg">Mixed reality performance preparation on Apple Vision Pro, built with a fifteen-person cross-functional team at U-M's Center for Academic Innovation and the School of Music, Theatre &amp; Dance. Two years from discovery to MVP.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
+              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Apple Vision Pro</span>
+              <span class="text-outline mx-1">·</span>
+              <span class="text-secondary font-medium">Product Manager</span>
+              <span class="text-outline mx-0.5">·</span>
+              <span class="text-secondary font-medium">MVP June 2026</span>
+            </div>
+            <a href="/piano-lab-pro/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
+              Read the case study <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acorns of Wisdom (image left) -->
+      <div class="group border-t border-outline-variant/40 border-b border-outline-variant/40">
+        <div class="flex flex-col lg:flex-row items-stretch">
+          <a href="/acorns/" class="w-full lg:w-[55%] overflow-hidden min-h-[360px] lg:min-h-[500px] block bg-surface-container-highest flex-shrink-0">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" src="/assets/acorns-hero.gif" alt="Acorns of Wisdom dashboard with team ratings and animated squirrel">
+          </a>
+          <div class="w-full px-8 lg:px-16 py-16 flex flex-col justify-center gap-7">
+            <div>
+              <h2 class="font-headline text-3xl font-semibold text-on-surface mb-4">
+                <a href="/acorns/" class="hover:text-primary transition-colors">Acorns of Wisdom</a>
+              </h2>
+              <p class="text-on-surface-variant leading-relaxed text-lg">A team health check web app I built for my own team in two weeks, deployed, and still in use. Anonymous ratings, passcode protection, drag-and-drop action items, and an animated squirrel.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs">
+              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">React</span>
+              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Firebase</span>
+              <span class="font-mono bg-surface-container px-2 py-1 text-on-surface-variant rounded">Vercel</span>
+              <span class="text-outline mx-1">·</span>
+              <span class="text-secondary font-medium">Self-directed</span>
+              <span class="text-outline mx-0.5">·</span>
+              <span class="text-secondary font-medium">Shipped</span>
+            </div>
+            <a href="/acorns/" class="text-primary hover:text-accent font-medium text-sm transition-colors inline-flex items-center gap-1">
+              Read the case study <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-teal-900 w-full py-12">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+      <a href="/" class="text-lg font-bold font-headline text-teal-50 hover:text-teal-200 transition-colors">&#8592; Home</a>
+      <p class="text-teal-100/50 text-sm">Powered by coffee.</p>
+      <a href="https://linkedin.com/in/amanda-lynn-cowell" target="_blank" rel="noopener noreferrer" class="text-teal-100/70 hover:text-teal-50 text-sm uppercase tracking-wide transition-colors">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+      document.getElementById('nav-menu').classList.toggle('is-open');
+    });
+  </script>
+
+</body>
+</html>
