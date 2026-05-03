@@ -237,9 +237,9 @@
   -->
   <script>
     const TYPES = ['video', 'writing', 'presentation', 'project'];
-    const SUBJECTS = ['math', 'xr', 'ai', 'teaching'];
+    const SUBJECTS = ['math', 'xr', 'ai', 'teaching', 'personal'];
     const TYPE_LABELS = { video: 'Video', writing: 'Writing', presentation: 'Presentation', project: 'Project' };
-    const SUBJECT_LABELS = { math: 'Math', xr: 'XR', ai: 'AI', teaching: 'Teaching' };
+    const SUBJECT_LABELS = { math: 'Math', xr: 'XR', ai: 'AI', teaching: 'Teaching', personal: 'Personal' };
 
     const items = [
       {
@@ -273,13 +273,13 @@
         external: false
       },
       {
-        id: 'daily-puzzles',
-        title: 'Daily puzzles',
+        id: 'puzzles',
+        title: 'Puzzles',
         types: ['project'],
-        subjects: ['math'],
-        description: '[Add description.] A personal habit of working through daily puzzles.',
-        thumbnail: null,
-        link: null,
+        subjects: ['personal', 'teaching'],
+        description: 'A daily ritual that started at FordLabs, became a personal habit, and now opens every standup with my current team.',
+        thumbnail: '/assets/puzzles-queens.jpg',
+        link: '/more/puzzles/',
         external: false
       },
       {
